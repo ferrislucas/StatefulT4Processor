@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl" Namespace="Model1.Target" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2006/04/edm" Namespace="Model1" Alias="Self">
+        <EntityContainer Name="Model1Container" >
+          <EntitySet Name="TestEntityDoNotAlterSet" EntityType="Model1.TestEntityDoNotAlter" />
+          <EntitySet Name="Entity2Set" EntityType="Model1.Entity2" />
+          <EntitySet Name="Entity3Set" EntityType="Model1.Faq" />
+          <EntitySet Name="TestEntity2" EntityType="Model1.TestEntity2" />
+          <EntitySet Name="TestEntity2Category" EntityType="Model1.TestEntity2Category" />
+          <AssociationSet Name="TestEntity2TestEntity2Category" Association="Model1.TestEntity2TestEntity2Category">
+            <End Role="TestEntity2" EntitySet="TestEntity2" />
+            <End Role="TestEntity2Category" EntitySet="TestEntity2Category" />
+          </AssociationSet>
+          <AssociationSet Name="TestEntity2Entity3" Association="Model1.TestEntity2Entity3">
+            <End Role="TestEntity2" EntitySet="TestEntity2" />
+            <End Role="Entity3" EntitySet="Entity3Set" />
+          </AssociationSet></EntityContainer>
+        <EntityType Name="TestEntityDoNotAlter">
+          <Key>
+            <PropertyRef Name="Key" /></Key>
+          <Property Name="Key" Type="Int32" Nullable="false" />
+					<Property Name="CreateDate" Type="datetime" Nullable="false" />
+					<Property Name="CreateBy" Type="nvarchar" Nullable="false" MaxLength="100" />
+					<Property Name="LastModifyDate" Type="datetime" Nullable="false" />
+					<Property Name="LastModifyBy" Type="nvarchar" Nullable="false" MaxLength="100" />
+					<Property Name="IsEnable" Type="Boolean" Nullable="true" />
+					<Property Name="ReferenceId" Type="String" Nullable="true" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="PublishOnDate" Type="DateTime" Nullable="true" />
+          <Property Name="ExpireAfterDate" Type="DateTime" Nullable="true" />
+          <Property Name="FullsizeImage" Type="Binary" Nullable="true" />
+          <Property Name="ThumbnailImage" Type="Binary" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          </EntityType>
+        <EntityType Name="Entity2">
+          <Key>
+            <PropertyRef Name="Id" /></Key>
+          <Property Name="Id" Type="Int32" Nullable="false" /></EntityType>
+        <EntityType Name="Faq">
+          <Key>
+            <PropertyRef Name="Id" /></Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestEntity2" Relationship="Model1.TestEntity2Entity3" FromRole="Entity3" ToRole="TestEntity2" /></EntityType>
+        <EntityType Name="TestEntity2">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Type="Int32" Name="Key" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="TestEntity2Category" Relationship="Model1.TestEntity2TestEntity2Category" FromRole="TestEntity2" ToRole="TestEntity2Category" />
+          <NavigationProperty Name="Faqs" Relationship="Model1.TestEntity2Entity3" FromRole="TestEntity2" ToRole="Entity3" />
+        </EntityType>
+        <EntityType Name="TestEntity2Category">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Type="Int32" Name="Key" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="TestEntity2" Relationship="Model1.TestEntity2TestEntity2Category" FromRole="TestEntity2Category" ToRole="TestEntity2" />
+        </EntityType>
+        <Association Name="TestEntity2TestEntity2Category">
+          <End Type="Model1.TestEntity2" Role="TestEntity2" Multiplicity="1" />
+          <End Type="Model1.TestEntity2Category" Role="TestEntity2Category" Multiplicity="0..1" />
+        </Association>
+        <Association Name="TestEntity2Entity3">
+          <End Type="Model1.TestEntity2" Role="TestEntity2" Multiplicity="1" />
+          <End Type="Model1.Faq" Role="Entity3" Multiplicity="*" />
+        </Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Target" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model1" >
+        <EntityTypeShape EntityType="Model1.TestEntityDoNotAlter" Width="2" PointX="1.375" PointY="1.375" Height="3.0714322916666656" />
+        <EntityTypeShape EntityType="Model1.Entity2" Width="1.5" PointX="3.75" PointY="1.375" Height="1.099264322916667" />
+        <EntityTypeShape EntityType="Model1.Faq" Width="1.5" PointX="6.75" PointY="1.25" Height="1.2636116536458339" />
+        <EntityTypeShape EntityType="Model1.TestEntity2" Width="2" PointX="3.75" PointY="2.875" Height="1.099264322916667" />
+        <EntityTypeShape EntityType="Model1.TestEntity2Category" Width="1.875" PointX="6.5" PointY="2.875" Height="1.0992643229166665" />
+        <AssociationConnector Association="Model1.TestEntity2TestEntity2Category">
+          <ConnectorPoint PointX="5.75" PointY="3.5068058268229167" />
+          <ConnectorPoint PointX="6.5" PointY="3.5068058268229167" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.TestEntity2Entity3">
+          <ConnectorPoint PointX="5.53125" PointY="2.875" />
+          <ConnectorPoint PointX="5.53125" PointY="1.28125" />
+          <ConnectorPoint PointX="6.75" PointY="1.28125" />
+        </AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
