@@ -16,8 +16,7 @@
 	string ProjectId = state.ProjectId+"";
 	string Namespace = state.Namespace+"";
 	string Classname = state.Classname+"";
-	string InterfaceName = state.ReplaceTag1+"";
-ASDFSF	
+	string InterfaceName = state.ReplaceTag1+"";	
 
 #>
 
