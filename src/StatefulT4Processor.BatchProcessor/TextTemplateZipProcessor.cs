@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using StatefulT4Processor.BatchProcessor.Helpers;
-using StatefulT4Processor.BatchProcessor.Services;
-using StatefulT4Processor.Shared;
+﻿using System.Collections.Generic;
+using StatefulT4Processor.TextTemplateZipProcessor.Services;
 
-namespace StatefulT4Processor.BatchProcessor
+namespace StatefulT4Processor.TextTemplateZipProcessor
 {
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
-	using System.Linq;
-	using System.Text;
-
 	namespace StatefulT4Processor.BatchProcessor
 	{
 		public class TextTemplateZipProcessor

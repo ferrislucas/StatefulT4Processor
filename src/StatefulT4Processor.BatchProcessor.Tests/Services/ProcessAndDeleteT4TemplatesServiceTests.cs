@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMoq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using StatefulT4Processor.BatchProcessor.Helpers;
-using StatefulT4Processor.BatchProcessor.Services;
-using IFileSystem = StatefulT4Processor.Shared.IFileSystem;
+using StatefulT4Processor.Shared;
+using StatefulT4Processor.TextTemplateZipProcessor.Helpers;
+using StatefulT4Processor.TextTemplateZipProcessor.Services;
 
-namespace StatefulT4Processor.BatchProcessor.Tests.Services
+namespace StatefulT4Processor.TextTemplateZipProcessor.Tests.Services
 {
 	[TestClass]
 	public class ProcessAndDeleteT4TemplatesServiceTests

@@ -2,7 +2,7 @@
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace StatefulT4Processor.BatchProcessor.Services
+namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 {
 	public interface IExtractZipToDirectoryService
 	{

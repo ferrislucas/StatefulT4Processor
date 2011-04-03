@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace StatefulT4Processor.BatchProcessor.Helpers
+namespace StatefulT4Processor.TextTemplateZipProcessor.Helpers
 {
 	public interface IT4TemplateHostWrapper
 	{

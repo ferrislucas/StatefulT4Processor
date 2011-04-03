@@ -3,20 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{223B61C3-BBC4-4C2D-869E-E30EFFDF3E3B}</ProjectGuid>
+    <ProjectGuid>{387F139C-1174-401B-BC9E-F4CCF2FF0D11}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CATALYST.Core.Tests</RootNamespace>
-    <AssemblyName>CATALYST.Core.Tests</AssemblyName>
+    <RootNamespace>StatefulT4Processor.TextTemplateBatchManager.Tests</RootNamespace>
+    <AssemblyName>StatefulT4Processor.TextTemplateBatchManager.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,43 +33,48 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMoq, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AutoMoq">
       <HintPath>..\..\lib\AutoMoq.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\EdmxIntegration\ConvertEntityTypeNameToCLRTypeNameActionTest.cs" />
-    <Compile Include="Actions\EdmxIntegration\ConvertEntityTypeNameToInstinctDateFieldTypeTest.cs" />
-    <Compile Include="Actions\EdmxIntegration\GetViewerFieldControlTypeByEntityPropertyActionTest.cs" />
-    <Compile Include="Actions\EdmxIntegration\RetrieveNavigationPropertiesByEntityNameTest.cs" />
-    <Compile Include="Actions\FileSystem\CreateDirectoryFromFilenameActionTest.cs" />
-    <Compile Include="Actions\FileSystem\RemoveAllFilesButLeaveDirectoryStructureActionTest.cs" />
-    <Compile Include="Actions\EdmxIntegration\RetrieveConceptualEntityPropertiesByEntityNameActionTest.cs" />
-    <Compile Include="CodeGenerationQueue\CodeGenerationQueueConsumerTest.cs" />
-    <Compile Include="CodeGenerationQueue\CreateCodeGenerationQueueFromXmlFileTest.cs" />
-    <Compile Include="Plurality\PluralizeWordTest.cs" />
-    <Compile Include="Plurality\UnpluralizeWordTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntitySMSAppCodeLayerTest.cs" />
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntityBusinessLayerSMSActionsTest.cs" />
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntityDataLayerTest.cs" />
-    <Compile Include="StateSeralization\DeserializeStateFromFileTest.cs" />
+    <Compile Include="ZipBatchProcessorTests_remove.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj">
-      <Project>{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}</Project>
-      <Name>StatefulT4Processor.T4StateManager</Name>
+    <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StatefulT4Processor.BatchManager\StatefulT4Processor.TextTemplateBatchManager.csproj">
+      <Project>{C67573A7-B06C-4000-80F7-06B7A1C28F78}</Project>
+      <Name>StatefulT4Processor.TextTemplateBatchManager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Webroot\StatefulT4Processor.Webroot.csproj">
-      <Project>{AD97542C-87DF-4CAA-A5B4-2E7B5592C9C5}</Project>
-      <Name>StatefulT4Processor.Webroot</Name>
+    <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
+      <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
+      <Name>StatefulT4Processor.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

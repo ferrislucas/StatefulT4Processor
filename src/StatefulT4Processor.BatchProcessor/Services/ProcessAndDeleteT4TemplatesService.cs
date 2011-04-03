@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using StatefulT4Processor.BatchProcessor.Helpers;
-using IFileSystem = StatefulT4Processor.Shared.IFileSystem;
+﻿using System.Collections.Generic;
+using StatefulT4Processor.Shared;
+using StatefulT4Processor.TextTemplateZipProcessor.Helpers;
 
-namespace StatefulT4Processor.BatchProcessor.Services
+namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 {
 	public interface IProcessAndDeleteT4TemplatesService
 	{

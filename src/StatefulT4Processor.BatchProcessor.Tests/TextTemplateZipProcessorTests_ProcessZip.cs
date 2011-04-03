@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using System.Linq;
 using AutoMoq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using StatefulT4Processor.BatchProcessor.Services;
-using StatefulT4Processor.BatchProcessor.StatefulT4Processor.BatchProcessor;
+using StatefulT4Processor.TextTemplateZipProcessor.Services;
 
-namespace StatefulT4Processor.BatchProcessor.Tests
+namespace StatefulT4Processor.TextTemplateZipProcessor.Tests
 {
 	[TestClass]
 	public class TextTemplateZipProcessorTests_ProcessZip
@@ -24,7 +21,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 		[TestMethod]
 		public void Calls_ExtractToPath_method_of_IExtractZipToDirectoryService()
 		{
-			mocker.Resolve<TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
+			mocker.Resolve<TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
 
 			mocker.GetMock<IExtractZipToDirectoryService>()
 				.Verify(a => a.ExtractToPath("pathToZip", "outputPath"), Times.Once());
@@ -33,7 +30,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 		[TestMethod]
 		public void Calls_RecursivelyProcessAndDeleteT4TemplatesStartingAtPath_method_of_IProcessAndDeleteT4TemplatesService()
 		{
-			mocker.Resolve<TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
+			mocker.Resolve<TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
 
 			mocker.GetMock<IProcessAndDeleteT4TemplatesService>()
 				.Verify(a => a.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("outputPath"), Times.Once());
@@ -46,7 +43,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 				.Setup(a => a.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(It.IsAny<string>()))
 				.Returns(new string[]{"error"});
 
-			var result = mocker.Resolve<TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
+			var result = mocker.Resolve<TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
 
 			Assert.AreEqual(1, result.Count());
 			Assert.AreEqual("error", result.First());
@@ -55,7 +52,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 		[TestMethod]
 		public void Calls_RecursivelyProcessAndDeleteT4TemplatesStartingAtPath_method_after_unpacking_zip()
 		{
-			var textTemplateZipProcessor = new TextTemplateZipProcessor(new DummyExtractZipToDirectoryService(),
+			var textTemplateZipProcessor = new TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor(new DummyExtractZipToDirectoryService(),
 			                                                            mocker.GetMock<IProcessAndDeleteT4TemplatesService>().
 			                                                            	Object);
 			try

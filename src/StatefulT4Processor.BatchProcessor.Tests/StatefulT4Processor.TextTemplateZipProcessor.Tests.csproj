@@ -9,8 +9,8 @@
     <ProjectGuid>{26026A81-CE26-4C25-A0E3-934F73CCD60C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatefulT4Processor.BatchProcessor.Tests</RootNamespace>
-    <AssemblyName>StatefulT4Processor.BatchProcessor.Tests</AssemblyName>
+    <RootNamespace>StatefulT4Processor.TextTemplateZipProcessor.Tests</RootNamespace>
+    <AssemblyName>StatefulT4Processor.TextTemplateZipProcessor.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -51,12 +51,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProcessAndDeleteT4TemplatesServiceTests.cs" />
     <Compile Include="TextTemplateZipProcessorTests_ProcessZip.cs" />
-    <Compile Include="ZipBatchProcessorTests_remove.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatefulT4Processor.BatchProcessor\StatefulT4Processor.BatchProcessor.csproj">
+    <ProjectReference Include="..\StatefulT4Processor.BatchProcessor\StatefulT4Processor.TextTemplateZipProcessor.csproj">
       <Project>{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}</Project>
-      <Name>StatefulT4Processor.BatchProcessor</Name>
+      <Name>StatefulT4Processor.TextTemplateZipProcessor</Name>
     </ProjectReference>
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>

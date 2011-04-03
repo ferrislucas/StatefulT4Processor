@@ -6,12 +6,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AD97542C-87DF-4CAA-A5B4-2E7B5592C9C5}</ProjectGuid>
+    <ProjectGuid>{C67573A7-B06C-4000-80F7-06B7A1C28F78}</ProjectGuid>
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatefulT4Processor.Webroot</RootNamespace>
-    <AssemblyName>StatefulT4Processor.Webroot</AssemblyName>
+    <RootNamespace>StatefulT4Processor.TextTemplateBatchManager</RootNamespace>
+    <AssemblyName>StatefulT4Processor.TextTemplateBatchManager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
   </PropertyGroup>
@@ -33,37 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapperAssist">
-      <HintPath>..\..\lib\AutoMapperAssist.dll</HintPath>
-    </Reference>
-    <Reference Include="EasyObjectStore">
-      <HintPath>..\..\lib\EasyObjectStore.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation">
-      <HintPath>..\..\lib\FluentValidation.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentValidation.Mvc">
-      <HintPath>..\..\lib\FluentValidation.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\..\lib\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcContrib">
-      <HintPath>..\..\lib\MvcContrib.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine">
-      <HintPath>..\..\..\lib\MvcTurbine.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine.FluentValidation">
-      <HintPath>..\..\lib\MvcTurbine.FluentValidation.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine.Unity">
-      <HintPath>..\..\lib\MvcTurbine.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcTurbine.Web">
-      <HintPath>..\..\lib\MvcTurbine.Web.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -95,36 +65,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\T4StateManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\InputModelToUserMapper.cs" />
-    <Compile Include="Mappers\InstanceToUserInputModelMapper.cs" />
-    <Compile Include="Models\ExecuteViewModel.cs" />
-    <Compile Include="Models\IndexViewModel.cs" />
-    <Compile Include="Models\InputModel.cs" />
-    <Compile Include="Models\ModifyViewModel.cs" />
+    <Compile Include="Helpers\GetWorkingFolderPath.cs" />
+    <Compile Include="Models\TextTemplateBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\EasyObjectStoreRegistrationAndConfiguration.cs" />
-    <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
-    <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Routing\RegisterRoutes.cs" />
-    <Compile Include="Services\ProcessInputModelService.cs" />
-    <None Include="Target_\Active\AppSettings.config">
-      <SubType>Designer</SubType>
-    </None>
-    <Compile Include="Validators\InputModelValidator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ViewModelBuilders\IndexViewModelBuilder.cs" />
-    <Compile Include="ViewModelBuilders\ModifyViewModelBuilder.cs" />
+    <Compile Include="Services\ZipBatchProcessor_remove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Views\T4StateManagement\Execute.aspx" />
-    <Content Include="Views\T4StateManagement\Index.aspx" />
-    <Content Include="Views\T4StateManagement\Modify.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -132,39 +82,20 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
-    <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatefulT4Processor.BatchManager\StatefulT4Processor.TextTemplateBatchManager.csproj">
-      <Project>{C67573A7-B06C-4000-80F7-06B7A1C28F78}</Project>
-      <Name>StatefulT4Processor.TextTemplateBatchManager</Name>
+    <ProjectReference Include="..\StatefulT4Processor.BatchProcessor\StatefulT4Processor.TextTemplateZipProcessor.csproj">
+      <Project>{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}</Project>
+      <Name>StatefulT4Processor.TextTemplateZipProcessor</Name>
     </ProjectReference>
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
       <Name>StatefulT4Processor.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj">
-      <Project>{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}</Project>
-      <Name>StatefulT4Processor.T4StateManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -182,7 +113,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49228</DevelopmentServerPort>
+          <DevelopmentServerPort>49404</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

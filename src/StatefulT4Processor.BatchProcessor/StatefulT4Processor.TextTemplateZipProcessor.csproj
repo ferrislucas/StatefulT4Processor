@@ -8,8 +8,8 @@
     <ProjectGuid>{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatefulT4Processor.BatchProcessor</RootNamespace>
-    <AssemblyName>StatefulT4Processor.BatchProcessor</AssemblyName>
+    <RootNamespace>StatefulT4Processor.TextTemplateZipProcessor</RootNamespace>
+    <AssemblyName>StatefulT4Processor.TextTemplateZipProcessor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,12 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TextTemplateZipProcessor.cs" />
-    <Compile Include="Helpers\GetWorkingFolderPath.cs" />
     <Compile Include="Helpers\T4TemplateHostWrapper.cs" />
     <Compile Include="Services\ExtractZipToDirectoryService.cs" />
     <Compile Include="Services\ProcessAndDeleteT4TemplatesService.cs" />
-    <Compile Include="ZipBatchProcessor_remove.cs" />
-    <Compile Include="Models\ZipBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
