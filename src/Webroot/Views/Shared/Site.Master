@@ -23,7 +23,7 @@
             <div id="menucontainer">
             
                 <ul id="menu">
-					<li><%: Html.ActionLink("Home", "Index", "T4StateManagement")%></li>              
+					<li><%: Html.ActionLink("Home", "Index", "TextTemplateBatchManager")%></li>
 <%--                    
                     <li><%: Html.ActionLink("About", "About", "Home")%></li>
 --%>                </ul>

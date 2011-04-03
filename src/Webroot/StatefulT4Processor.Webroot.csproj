@@ -55,6 +55,9 @@
     <Reference Include="MvcTurbine">
       <HintPath>..\..\..\lib\MvcTurbine.dll</HintPath>
     </Reference>
+    <Reference Include="MvcTurbine.EmbeddedViews">
+      <HintPath>..\..\lib\MvcTurbine.EmbeddedViews.dll</HintPath>
+    </Reference>
     <Reference Include="MvcTurbine.FluentValidation">
       <HintPath>..\..\lib\MvcTurbine.FluentValidation.dll</HintPath>
     </Reference>

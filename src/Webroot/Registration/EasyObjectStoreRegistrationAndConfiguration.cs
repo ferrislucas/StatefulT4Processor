@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using EasyObjectStore.Helpers;
 using MvcTurbine.ComponentModel;
@@ -18,7 +19,7 @@ namespace StatefulT4Processor.Webroot.Registration
 	{
 		public string GetPathToDirectory()
 		{
-			return @"C:\_Application\StatefulT4Processor\localWorkingFolder\Data\";
+			return ConfigurationManager.AppSettings["PathToLocalWorkingFolder"] + @"Data\";
 		}
 
 		public void Register(IServiceLocator locator)

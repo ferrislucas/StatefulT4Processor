@@ -33,7 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyObjectStore">
+      <HintPath>..\..\lib\EasyObjectStore.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcContrib">
+      <HintPath>..\..\lib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcTurbine, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -65,17 +72,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TextTemplateBatchManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GetWorkingFolderPath.cs" />
+    <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\TextTemplateBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
+    <Compile Include="Repositories\TextTemplateBatchRepository.cs" />
+    <Compile Include="Routing\RegisterRoutes.cs" />
     <Compile Include="Services\TextTemplateBatchProcessor.cs" />
     <Compile Include="TextTemplateBatchManagerSettings.cs" />
+    <Compile Include="ViewModelBuilders\IndexViewModelBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Views\TextTemplateBatchManager\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -87,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StatefulT4Processor.BatchProcessor\StatefulT4Processor.TextTemplateZipProcessor.csproj">
