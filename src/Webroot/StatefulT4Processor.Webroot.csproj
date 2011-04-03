@@ -111,6 +111,9 @@
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Routing\RegisterRoutes.cs" />
     <Compile Include="Services\ProcessInputModelService.cs" />
+    <None Include="Target_\Active\AppSettings.config">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Validators\InputModelValidator.cs">
       <SubType>Code</SubType>
     </Compile>

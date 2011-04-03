@@ -15,7 +15,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.T4StateManager", "StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj", "{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.BatchProcessor", "StatefulT4Processor.BatchProcessor\StatefulT4Processor.BatchProcessor.csproj", "{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.BatchProcessor.Tests", "StatefulT4Processor.BatchProcessor.Tests\StatefulT4Processor.BatchProcessor.Tests.csproj", "{26026A81-CE26-4C25-A0E3-934F73CCD60C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87A57411-9318-4ECF-A26F-6BB34FC897F4}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		StatefulT4Processor.vsmdi = StatefulT4Processor.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = StatefulT4Processor.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -49,6 +63,14 @@ Global
 		{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
