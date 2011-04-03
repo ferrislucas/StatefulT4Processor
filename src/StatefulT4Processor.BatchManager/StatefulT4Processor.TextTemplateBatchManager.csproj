@@ -78,6 +78,8 @@
     </Compile>
     <Compile Include="Helpers\GetWorkingFolderPath.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
+    <Compile Include="Models\ModifyInputModel.cs" />
+    <Compile Include="Models\ModifyViewModel.cs" />
     <Compile Include="Models\TextTemplateBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
@@ -90,6 +92,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Views\TextTemplateBatchManager\Index.aspx" />
+    <EmbeddedResource Include="Views\TextTemplateBatchManager\Modify.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
