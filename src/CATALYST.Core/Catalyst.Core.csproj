@@ -95,10 +95,6 @@
     <Compile Include="CodeGenerationQueue\CodeGenerationQueueConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Mono.TextTemplating\Mono.TextTemplating.csproj">
-      <Project>{B7609CC7-428F-45FC-99F7-6F1D797961A5}</Project>
-      <Name>Mono.TextTemplating</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
       <Name>StatefulT4Processor.Shared</Name>
