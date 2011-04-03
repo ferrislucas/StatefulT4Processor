@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalyst.Core", "CATALYST.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalyst.Core.Tests", "CATALYST.Core.Tests\Catalyst.Core.Tests.csproj", "{223B61C3-BBC4-4C2D-869E-E30EFFDF3E3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4RunnerConsoleApplication", "ConsoleApplication1\T4RunnerConsoleApplication.csproj", "{710A780D-A4FA-492F-8D65-308C9F107A79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleApplication", "ConsoleApplication1\TestConsoleApplication.csproj", "{710A780D-A4FA-492F-8D65-308C9F107A79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.T4StateManager", "StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj", "{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}"
 EndProject
@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		StatefulT4Processor.vsmdi = StatefulT4Processor.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4HostConsoleApplication", "T4HostConsoleApplication\T4HostConsoleApplication.csproj", "{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -129,6 +131,16 @@ Global
 		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{26026A81-CE26-4C25-A0E3-934F73CCD60C}.Release|x86.ActiveCfg = Release|Any CPU
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Debug|x86.ActiveCfg = Debug|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Debug|x86.Build.0 = Debug|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Release|Any CPU.ActiveCfg = Release|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Release|x86.ActiveCfg = Release|x86
+		{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
