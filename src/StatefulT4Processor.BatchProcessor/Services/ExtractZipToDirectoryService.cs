@@ -13,10 +13,10 @@ namespace StatefulT4Processor.BatchProcessor.Services
 	{
 		public void ExtractToPath(string pathToZip, string pathToExtractTo)
 		{
-			throw new NotImplementedException();
+			Extract(pathToZip, pathToExtractTo);
 		}
 
-		private static void Extract(string path)
+		private static void Extract(string path, string pathToExtractTo)
 		{
 			using (ZipInputStream s = new ZipInputStream(File.OpenRead(path)))
 			{
@@ -27,8 +27,8 @@ namespace StatefulT4Processor.BatchProcessor.Services
 
 					//Console.WriteLine(theEntry.Name);
 
-					string directoryName = Path.GetDirectoryName(theEntry.Name);
-					string fileName = Path.GetFileName(theEntry.Name);
+					string directoryName = Path.GetDirectoryName(pathToExtractTo + Path.DirectorySeparatorChar + theEntry.Name);
+					string fileName = directoryName + Path.DirectorySeparatorChar + Path.GetFileName(theEntry.Name);
 
 					// create directory
 					if (directoryName.Length > 0)
@@ -38,7 +38,7 @@ namespace StatefulT4Processor.BatchProcessor.Services
 
 					if (fileName != String.Empty)
 					{
-						using (FileStream streamWriter = File.Create(theEntry.Name))
+						using (FileStream streamWriter = File.Create(fileName))
 						{
 
 							int size = 2048;
