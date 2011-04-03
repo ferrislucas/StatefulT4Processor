@@ -5,7 +5,12 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 {
 	namespace StatefulT4Processor.BatchProcessor
 	{
-		public class TextTemplateZipProcessor
+		public interface ITextTemplateZipProcessor
+		{
+			IEnumerable<string> ProcessZip(string pathToZip, string outputPath);
+		}
+
+		public class TextTemplateZipProcessor : ITextTemplateZipProcessor
 		{
 			private readonly IExtractZipToDirectoryService extractZipToDirectoryService;
 			private readonly IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService;

@@ -71,7 +71,7 @@
     <Compile Include="Helpers\GetWorkingFolderPath.cs" />
     <Compile Include="Models\TextTemplateBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ZipBatchProcessor_remove.cs" />
+    <Compile Include="Services\TextTemplateBatchProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

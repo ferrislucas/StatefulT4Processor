@@ -7,6 +7,7 @@ using StatefulT4Processor.Shared;
 using StatefulT4Processor.TextTemplateBatchManager.Helpers;
 using StatefulT4Processor.TextTemplateBatchManager.Models;
 using StatefulT4Processor.TextTemplateBatchManager.Services;
+using StatefulT4Processor.TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor;
 
 namespace StatefulT4Processor.TextTemplateBatchManager.Tests
 {
@@ -29,7 +30,7 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Tests
 		[TestMethod]
 		public void Creates_temp_working_folder()
 		{
-			mocker.Resolve<ZipBatchProcessor_remove>().ProcessBatch(new TextTemplateBatch());
+			mocker.Resolve<TextTemplateBatchProcessor>().ProcessBatch(new TextTemplateBatch());
 
 			mocker.GetMock<IFileSystem>()
 				.Verify(a => a.CreateFolder(GetTemporaryWorkingFolderPath()), Times.Once());
@@ -40,13 +41,28 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Tests
 		{
 			var zipBatchId = Guid.NewGuid();
 			
-			var result = mocker.Resolve<ZipBatchProcessor_remove>().ProcessBatch(new TextTemplateBatch()
+			var result = mocker.Resolve<TextTemplateBatchProcessor>().ProcessBatch(new TextTemplateBatch()
 																	{
 																		Id = zipBatchId.ToString(),
 																		ZipFilename = "zipFilename.zip",
 																	});
 
 			Assert.AreEqual(GetTemporaryWorkingFolderPath(), result);
+		}
+
+		[TestMethod]
+		public void Calls_ProcessZip_method_of_ITextTemplateZipProcessor()
+		{
+			mocker.GetMock<IGetWorkingFolderPath>().Setup(a => a.GetPathToWorkingFolder()).Returns("workingFolderPath");
+
+			mocker.Resolve<TextTemplateBatchProcessor>().ProcessBatch(new TextTemplateBatch()
+			                                                        	{
+			                                                        		Id = "id",
+																			ZipFilename = "filename.zip"
+			                                                        	});
+
+			mocker.GetMock<ITextTemplateZipProcessor>()
+				.Verify(a => a.ProcessZip("workingFolderPath" + "BatchProcessFileUploads" + Path.DirectorySeparatorChar + "id" + Path.DirectorySeparatorChar + "filename.zip", string.Format("workingFolderPath" + "BatchProcessTemp" + Path.DirectorySeparatorChar + "{0}", guid)), Times.Once());
 		}
 
 		private string GetTemporaryWorkingFolderPath()

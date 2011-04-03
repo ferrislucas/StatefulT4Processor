@@ -2,19 +2,23 @@
 using StatefulT4Processor.Shared;
 using StatefulT4Processor.TextTemplateBatchManager.Helpers;
 using StatefulT4Processor.TextTemplateBatchManager.Models;
+using StatefulT4Processor.TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor;
 
 namespace StatefulT4Processor.TextTemplateBatchManager.Services
 {
-	public class ZipBatchProcessor_remove
+	public class TextTemplateBatchProcessor
 	{
 		private readonly IFileSystem fileSystem;
 		private readonly IGuidGetter guidGetter;
 		private readonly IGetWorkingFolderPath getWorkingFolderPath;
+		private readonly ITextTemplateZipProcessor textTemplateZipProcessor;
 
-		public ZipBatchProcessor_remove(IGuidGetter guidGetter, 
+		public TextTemplateBatchProcessor(IGuidGetter guidGetter, 
 								IFileSystem fileSystem,
-								IGetWorkingFolderPath getWorkingFolderPath)
+								IGetWorkingFolderPath getWorkingFolderPath,
+								ITextTemplateZipProcessor textTemplateZipProcessor)
 		{
+			this.textTemplateZipProcessor = textTemplateZipProcessor;
 			this.getWorkingFolderPath = getWorkingFolderPath;
 			this.guidGetter = guidGetter;
 			this.fileSystem = fileSystem;
@@ -22,20 +26,22 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Services
 
 		public string ProcessBatch(TextTemplateBatch textTemplateBatch)
 		{
-			var pathToWorkingDirectory = getWorkingFolderPath.GetPathToWorkingFolder() + 
+			var pathToExtractZipTo = getWorkingFolderPath.GetPathToWorkingFolder() + 
 											"BatchProcessTemp" + 
 											Path.DirectorySeparatorChar + 
 											guidGetter.GetGuid();
 
-			fileSystem.CreateFolder(pathToWorkingDirectory);
+			fileSystem.CreateFolder(pathToExtractZipTo);
 
 			var pathToZip = getWorkingFolderPath.GetPathToWorkingFolder() + 
 										"BatchProcessFileUploads" + 
 										Path.DirectorySeparatorChar + 
 										textTemplateBatch.Id +
-										Path.DirectorySeparatorChar + textTemplateBatch.ZipFilename;			
+										Path.DirectorySeparatorChar + textTemplateBatch.ZipFilename;
 
-			return pathToWorkingDirectory;
+			textTemplateZipProcessor.ProcessZip(pathToZip, pathToExtractZipTo);
+
+			return pathToExtractZipTo;
 		}
 	}
 }
