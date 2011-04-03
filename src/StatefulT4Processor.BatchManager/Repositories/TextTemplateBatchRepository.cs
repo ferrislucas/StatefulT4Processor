@@ -10,6 +10,8 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Repositories
 	public interface ITextTemplateBatchRepository
 	{
 		IEnumerable<TextTemplateBatch> GetAll();
+		string SaveAndReturnId(TextTemplateBatch textTemplateBatch);
+		void Delete(string id);
 	}
 
 	public class TextTemplateBatchRepository : ITextTemplateBatchRepository
@@ -24,6 +26,16 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Repositories
 		public IEnumerable<TextTemplateBatch> GetAll()
 		{
 			return easyObjectStore.GetAll();
+		}
+
+		public string SaveAndReturnId(TextTemplateBatch textTemplateBatch)
+		{
+			return easyObjectStore.SaveAndReturnId(textTemplateBatch);
+		}
+
+		public void Delete(string id)
+		{
+			easyObjectStore.Delete(id);
 		}
 	}
 }

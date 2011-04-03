@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace StatefulT4Processor.TextTemplateBatchManager.Models
 {
-	public class ModifyInputModel
+	public class TextTemplateModifyInputModel
 	{
 		[HiddenInput(DisplayValue = false)]
 		public string Id { get; set; }
