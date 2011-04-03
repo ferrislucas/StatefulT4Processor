@@ -14,6 +14,8 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Models
 
 		public string Name { get; set; }
 
+		public string ZipFilename { get; set; }
+
 		[DisplayName("Zip File")]
 		public string ZipFile { get; set; }
 	}

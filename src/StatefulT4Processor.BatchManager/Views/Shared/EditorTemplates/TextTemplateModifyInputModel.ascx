@@ -16,7 +16,7 @@
                 <%: Html.LabelFor(model => model.ZipFile) %>
             </div>
             <div class="editor-field">
-				<input type="file" name="ModifyInputModel_ZipFile" />
+				<input type="file" name="ModifyInputModel_ZipFile" /> <%=Model.ZipFilename %>
                 <%: Html.ValidationMessageFor(model => model.ZipFile) %>
             </div>
         
