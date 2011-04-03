@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.TextTem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.TextTemplateBatchManager.Tests", "StatefulT4Processor.BatchManager.Tests\StatefulT4Processor.TextTemplateBatchManager.Tests.csproj", "{387F139C-1174-401B-BC9E-F4CCF2FF0D11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.DeploymentManager", "StatefulT4Processor.DeploymentManager\StatefulT4Processor.DeploymentManager.csproj", "{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatefulT4Processor.DeploymentManager.Tests", "StatefulT4Processor.DeploymentManager.Tests\StatefulT4Processor.DeploymentManager.Tests.csproj", "{13111C4F-BEC5-431F-802E-B1286E5EE348}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = StatefulT4Processor.vsmdi
@@ -129,6 +133,26 @@ Global
 		{387F139C-1174-401B-BC9E-F4CCF2FF0D11}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{387F139C-1174-401B-BC9E-F4CCF2FF0D11}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{387F139C-1174-401B-BC9E-F4CCF2FF0D11}.Release|x86.ActiveCfg = Release|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}.Release|x86.ActiveCfg = Release|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13111C4F-BEC5-431F-802E-B1286E5EE348}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

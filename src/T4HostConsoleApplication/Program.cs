@@ -12,8 +12,8 @@ namespace T4HostConsoleApplication
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("press a key");
-			Console.ReadKey();
+			//Console.WriteLine("press a key");
+			//Console.ReadKey();
 			var resultXml = string.Empty;
 			try
 			{

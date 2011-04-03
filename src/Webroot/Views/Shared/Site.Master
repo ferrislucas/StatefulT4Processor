@@ -24,6 +24,7 @@
             
                 <ul id="menu">
 					<li><%: Html.ActionLink("Batches", "Index", "TextTemplateBatchManager")%></li>
+					<li><%: Html.ActionLink("Deployments", "Index", "DeploymentManager")%></li>
 <%--                    
                     <li><%: Html.ActionLink("About", "About", "Home")%></li>
 --%>                </ul>

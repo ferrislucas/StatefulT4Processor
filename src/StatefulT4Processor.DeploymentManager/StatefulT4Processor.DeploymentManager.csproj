@@ -6,14 +6,15 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AD97542C-87DF-4CAA-A5B4-2E7B5592C9C5}</ProjectGuid>
+    <ProjectGuid>{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}</ProjectGuid>
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StatefulT4Processor.Webroot</RootNamespace>
-    <AssemblyName>StatefulT4Processor.Webroot</AssemblyName>
+    <RootNamespace>StatefulT4Processor.DeploymentManager</RootNamespace>
+    <AssemblyName>StatefulT4Processor.DeploymentManager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,9 @@
     <Reference Include="AutoMapperAssist">
       <HintPath>..\..\lib\AutoMapperAssist.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMoq">
+      <HintPath>..\..\lib\AutoMoq.dll</HintPath>
+    </Reference>
     <Reference Include="EasyObjectStore">
       <HintPath>..\..\lib\EasyObjectStore.dll</HintPath>
     </Reference>
@@ -45,15 +49,28 @@
     <Reference Include="FluentValidation.Mvc">
       <HintPath>..\..\lib\FluentValidation.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2">
+      <HintPath>..\..\lib\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\..\lib\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="MvcContrib">
+    <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Microsoft.VisualStudio.TextTemplating.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=3.0.51.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvcContrib.dll</HintPath>
     </Reference>
-    <Reference Include="MvcTurbine">
-      <HintPath>..\..\..\lib\MvcTurbine.dll</HintPath>
+    <Reference Include="MvcTurbine, Version=2.1.0.0, Culture=neutral, PublicKeyToken=0e426322531bc5b0, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\MvcTurbine.dll</HintPath>
     </Reference>
     <Reference Include="MvcTurbine.EmbeddedViews">
       <HintPath>..\..\lib\MvcTurbine.EmbeddedViews.dll</HintPath>
@@ -69,109 +86,59 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\T4StateManagementController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Mappers\InputModelToUserMapper.cs" />
-    <Compile Include="Mappers\InstanceToUserInputModelMapper.cs" />
-    <Compile Include="Models\ExecuteViewModel.cs" />
+    <Compile Include="Controllers\DeploymentManagerController.cs" />
+    <Compile Include="Helpers\GuidGetter.cs" />
+    <Compile Include="Mappers\InputModelToDeploymentMapper.cs" />
+    <Compile Include="Mappers\InstanceToInputModelMapper.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
-    <Compile Include="Models\InputModel.cs" />
     <Compile Include="Models\ModifyViewModel.cs" />
+    <Compile Include="Models\Deployment.cs" />
+    <Compile Include="Models\InputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\EasyObjectStoreRegistrationAndConfiguration.cs" />
     <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
+    <Compile Include="Registration\InterfaceToSingleImplementationRegistrationConvention.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Routing\RegisterRoutes.cs" />
     <Compile Include="Services\ProcessInputModelService.cs" />
-    <None Include="Target_\Active\AppSettings.config">
-      <SubType>Designer</SubType>
-    </None>
-    <Compile Include="Validators\InputModelValidator.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Validators\InputModelValidator.cs" />
     <Compile Include="ViewModelBuilders\IndexViewModelBuilder.cs" />
     <Compile Include="ViewModelBuilders\ModifyViewModelBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Views\T4StateManagement\Execute.aspx" />
-    <Content Include="Views\T4StateManagement\Index.aspx" />
-    <Content Include="Views\T4StateManagement\Modify.aspx" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Shared\Error.aspx" />
-    <Content Include="Views\Shared\LogOnUserControl.ascx" />
-    <Content Include="Views\Shared\Site.Master" />
-    <Content Include="Views\Web.config" />
+    <EmbeddedResource Include="Views\DeploymentManager\Index.aspx" />
+    <EmbeddedResource Include="Views\DeploymentManager\Modify.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StatefulT4Processor.BatchManager\StatefulT4Processor.TextTemplateBatchManager.csproj">
-      <Project>{C67573A7-B06C-4000-80F7-06B7A1C28F78}</Project>
-      <Name>StatefulT4Processor.TextTemplateBatchManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatefulT4Processor.DeploymentManager\StatefulT4Processor.DeploymentManager.csproj">
-      <Project>{BE0B07EB-DEA9-4CA0-9D0D-E6892A1453B3}</Project>
-      <Name>StatefulT4Processor.DeploymentManager</Name>
-    </ProjectReference>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
       <Name>StatefulT4Processor.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj">
-      <Project>{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}</Project>
-      <Name>StatefulT4Processor.T4StateManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -189,7 +156,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49228</DevelopmentServerPort>
+          <DevelopmentServerPort>49394</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
