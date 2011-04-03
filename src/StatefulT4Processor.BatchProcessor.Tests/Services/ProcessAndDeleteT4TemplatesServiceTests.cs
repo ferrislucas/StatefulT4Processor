@@ -37,7 +37,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests.Services
 							});
 
 			mocker.Resolve<ProcessAndDeleteT4TemplatesService>()
-				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPath("path");
+				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("path");
 
 			mocker.GetMock<IT4TemplateHostWrapper>()
 				.Verify(a => a.ProcessT4File("file1.cs.tt", "file1.cs"), Times.Once());
@@ -63,7 +63,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests.Services
 							});
 
 			mocker.Resolve<ProcessAndDeleteT4TemplatesService>()
-				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPath("path");
+				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("path");
 
 			mocker.GetMock<IT4TemplateHostWrapper>()
 				.Verify(a => a.ProcessT4File("file1.cs.tt", "file1.cs"), Times.Once());
@@ -89,7 +89,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests.Services
 							});
 
 			mocker.Resolve<ProcessAndDeleteT4TemplatesService>()
-				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPath("path");
+				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("path");
 
 			mocker.GetMock<IFileSystem>()
 				.Verify(a => a.DeleteFile("file1.cs.tt"), Times.Once());
@@ -98,7 +98,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests.Services
 		}
 
 		[TestMethod]
-		public void Calls_Deletes_method_of_IFileSystem_after_processing_template()
+		public void Calls_Delete_method_of_IFileSystem_after_processing_template()
 		{
 			mocker.GetMock<IFileSystem>().Setup(a => a.GetFiles(It.IsAny<string>()))
 				.Returns(new string[] { "file1.tt" });
@@ -106,10 +106,25 @@ namespace StatefulT4Processor.BatchProcessor.Tests.Services
 			try
 			{
 				GetInstanceOfProcessAndDeleteT4TemplatesServiceWithDummyTemplateProcessor()
-					.RecursivelyProcessAndDeleteT4TemplatesStartingAtPath("path");				
+					.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("path");				
 			}catch(Exception){}
 
 			mocker.GetMock<IFileSystem>().Verify(a => a.DeleteFile(It.IsAny<string>()), Times.Never());
+		}
+
+		[TestMethod]
+		public void Returns_Errors_property_of_IT4TemplateHostWrapper()
+		{
+			mocker.GetMock<IT4TemplateHostWrapper>().Setup(a => a.Errors).Returns(new string[] { "error" });
+
+			mocker.GetMock<IFileSystem>().Setup(a => a.GetFiles(It.IsAny<string>()))
+				.Returns(new string[] { "file1.tt" });
+
+			var result = mocker.Resolve<ProcessAndDeleteT4TemplatesService>()
+				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("path");
+
+			Assert.AreEqual(1, result.Count());
+			Assert.AreEqual("error", result.First());
 		}
 
 		private ProcessAndDeleteT4TemplatesService GetInstanceOfProcessAndDeleteT4TemplatesServiceWithDummyTemplateProcessor()

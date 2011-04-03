@@ -44,11 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TextTemplateZipProcessor.cs" />
     <Compile Include="Helpers\GetWorkingFolderPath.cs" />
     <Compile Include="Helpers\T4TemplateHostWrapper.cs" />
     <Compile Include="Services\ExtractZipToDirectoryService.cs" />
     <Compile Include="Services\ProcessAndDeleteT4TemplatesService.cs" />
-    <Compile Include="ZipBatchProcessor.cs" />
+    <Compile Include="ZipBatchProcessor_remove.cs" />
     <Compile Include="Models\ZipBatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

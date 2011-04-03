@@ -9,7 +9,7 @@ namespace StatefulT4Processor.BatchProcessor.Services
 {
 	public interface IProcessAndDeleteT4TemplatesService
 	{
-		void RecursivelyProcessAndDeleteT4TemplatesStartingAtPath(string path);
+		IEnumerable<string> RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(string path);
 	}
 
 	public class ProcessAndDeleteT4TemplatesService : IProcessAndDeleteT4TemplatesService
@@ -23,7 +23,7 @@ namespace StatefulT4Processor.BatchProcessor.Services
 			this.fileSystem = fileSystem;
 		}
 
-		public void RecursivelyProcessAndDeleteT4TemplatesStartingAtPath(string path)
+		public IEnumerable<string> RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(string path)
 		{
 			foreach(var file in fileSystem.GetFiles(path))
 			{
@@ -33,8 +33,10 @@ namespace StatefulT4Processor.BatchProcessor.Services
 
 			foreach (var directory in fileSystem.GetDirectories(path))
 			{
-				RecursivelyProcessAndDeleteT4TemplatesStartingAtPath(directory);
+				RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(directory);
 			}
+
+			return t4TemplateHostWrapper.Errors;
 		}
 	}
 }

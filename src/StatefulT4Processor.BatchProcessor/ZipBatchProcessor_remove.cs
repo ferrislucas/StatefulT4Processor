@@ -10,7 +10,7 @@ using StatefulT4Processor.Shared;
 
 namespace StatefulT4Processor.BatchProcessor
 {
-	public class ZipBatchProcessor
+	public class ZipBatchProcessor_remove
 	{
 		private readonly IFileSystem fileSystem;
 		private readonly IGuidGetter guidGetter;
@@ -18,7 +18,7 @@ namespace StatefulT4Processor.BatchProcessor
 		private readonly IExtractZipToDirectoryService extractZipToDirectoryService;
 		private readonly IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService;
 
-		public ZipBatchProcessor(IGuidGetter guidGetter, 
+		public ZipBatchProcessor_remove(IGuidGetter guidGetter, 
 								IFileSystem fileSystem,
 								IGetWorkingFolderPath getWorkingFolderPath,
 								IExtractZipToDirectoryService extractZipToDirectoryService,
@@ -48,7 +48,7 @@ namespace StatefulT4Processor.BatchProcessor
 			
 			extractZipToDirectoryService.ExtractToPath(pathToZip, pathToWorkingDirectory);
 
-			processAndDeleteT4TemplatesService.RecursivelyProcessAndDeleteT4TemplatesStartingAtPath(pathToWorkingDirectory);
+			processAndDeleteT4TemplatesService.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(pathToWorkingDirectory);
 
 			return pathToWorkingDirectory;
 		}

@@ -14,7 +14,7 @@ using StatefulT4Processor.Shared;
 namespace StatefulT4Processor.BatchProcessor.Tests
 {
 	[TestClass]
-	public class ZipBatchProcessorTests
+	public class ZipBatchProcessorTests_remove
 	{
 		private AutoMoqer mocker;
 		private Guid guid;
@@ -32,7 +32,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 		[TestMethod]
 		public void Creates_temp_working_folder()
 		{
-			mocker.Resolve<ZipBatchProcessor>().ProcessBatch(new ZipBatch());
+			mocker.Resolve<ZipBatchProcessor_remove>().ProcessBatch(new ZipBatch());
 
 			mocker.GetMock<IFileSystem>()
 				.Verify(a => a.CreateFolder(GetTemporaryWorkingFolderPath()), Times.Once());
@@ -49,7 +49,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 										Path.DirectorySeparatorChar + 
 										"zipFilename.zip");
 
-			mocker.Resolve<ZipBatchProcessor>().ProcessBatch(new ZipBatch()
+			mocker.Resolve<ZipBatchProcessor_remove>().ProcessBatch(new ZipBatch()
 			                                                 	{
 																	Id = zipBatchId.ToString(),
 																	ZipFilename = "zipFilename.zip",
@@ -63,14 +63,14 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 		public void Calls_RecursivelyProcessAndDeleteT4TemplatesStartingAtPath_method_of_IProcessAndDeleteT4TemplatesService()
 		{
 			var zipBatchId = Guid.NewGuid();
-			mocker.Resolve<ZipBatchProcessor>().ProcessBatch(new ZipBatch()
+			mocker.Resolve<ZipBatchProcessor_remove>().ProcessBatch(new ZipBatch()
 																{
 																	Id = zipBatchId.ToString(),
 																	ZipFilename = "zipFilename.zip",
 																});
 
 			mocker.GetMock<IProcessAndDeleteT4TemplatesService>()
-				.Verify(a => a.RecursivelyProcessAndDeleteT4TemplatesStartingAtPath(GetTemporaryWorkingFolderPath()), Times.Once());
+				.Verify(a => a.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(GetTemporaryWorkingFolderPath()), Times.Once());
 		}
 
 		[TestMethod]
@@ -78,7 +78,7 @@ namespace StatefulT4Processor.BatchProcessor.Tests
 		{
 			var zipBatchId = Guid.NewGuid();
 			
-			var result = mocker.Resolve<ZipBatchProcessor>().ProcessBatch(new ZipBatch()
+			var result = mocker.Resolve<ZipBatchProcessor_remove>().ProcessBatch(new ZipBatch()
 																	{
 																		Id = zipBatchId.ToString(),
 																		ZipFilename = "zipFilename.zip",

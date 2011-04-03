@@ -19,7 +19,7 @@ namespace ConsoleApplication1
 		static void Main(string[] args)
 		{
 			var zipBatchProcessor = 
-				new ZipBatchProcessor(new GuidGetter(), 
+				new ZipBatchProcessor_remove(new GuidGetter(), 
 									new StatefulT4Processor.Shared.FileSystem(), 
 									new GetWorkingFolderPath(), 
 									new ExtractZipToDirectoryService(), 

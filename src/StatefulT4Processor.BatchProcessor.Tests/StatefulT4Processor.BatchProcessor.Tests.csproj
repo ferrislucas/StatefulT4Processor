@@ -50,7 +50,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProcessAndDeleteT4TemplatesServiceTests.cs" />
-    <Compile Include="ZipBatchProcessorTests.cs" />
+    <Compile Include="TextTemplateZipProcessorTests_ProcessZip.cs" />
+    <Compile Include="ZipBatchProcessorTests_remove.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StatefulT4Processor.BatchProcessor\StatefulT4Processor.BatchProcessor.csproj">
