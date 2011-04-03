@@ -23,6 +23,7 @@ namespace StatefulT4Processor.Shared
 		FileInformation GetFileInformation(string path);
 		bool FileExists(string path);
 		bool DirectoryExists(string path);
+		string[] GetDirectories(string path);
 	}
 
 	public class FileInformation
@@ -36,6 +37,11 @@ namespace StatefulT4Processor.Shared
 		public bool DirectoryExists(string path)
 		{
 			return Directory.Exists(path);
+		}
+
+		public string[] GetDirectories(string path)
+		{
+			return Directory.GetDirectories(path);
 		}
 
 		public bool FileExists(string path)
