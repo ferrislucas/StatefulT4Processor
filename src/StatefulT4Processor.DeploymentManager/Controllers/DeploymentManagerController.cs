@@ -15,20 +15,20 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly IIndexViewModelBuilder indexViewModelBuilder;
     	private readonly IModifyViewModelBuilder modifyViewModelBuilder;
     	private readonly IProcessInputModelService processInputModelService;
-    	private readonly IWidgetRepository widgetRepository;
+    	private readonly IDeploymentRepository deploymentRepository;
     	private readonly IInstanceToWidgetInputModelMapper instanceToWidgetInputModelMapper;
     	private readonly IGuidGetter guidGetter;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,
 								IProcessInputModelService processInputModelService,
-								IWidgetRepository widgetRepository,
+								IDeploymentRepository deploymentRepository,
 								IInstanceToWidgetInputModelMapper instanceToWidgetInputModelMapper,
 								IGuidGetter guidGetter)
     	{
     		this.guidGetter = guidGetter;
     		this.instanceToWidgetInputModelMapper = instanceToWidgetInputModelMapper;
-    		this.widgetRepository = widgetRepository;
+    		this.deploymentRepository = deploymentRepository;
     		this.processInputModelService = processInputModelService;
     		this.modifyViewModelBuilder = modifyViewModelBuilder;
     		this.indexViewModelBuilder = indexViewModelBuilder;
@@ -58,7 +58,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 
 		public ActionResult Modify(string id)
 		{
-			var user = widgetRepository.GetAll().Where(a => a.Id == id).FirstOrDefault();
+			var user = deploymentRepository.GetAll().Where(a => a.Id == id).FirstOrDefault();
 
 			return View("Modify", modifyViewModelBuilder.BuildViewModel(instanceToWidgetInputModelMapper.CreateInstance(user)));
 		}
@@ -86,7 +86,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 			routeValues.Add("Controller", GetTheNameOfThisController());
 			routeValues.Add("Action", "Index");
 			
-			widgetRepository.Delete(id);
+			deploymentRepository.Delete(id);
 
 			return new RedirectToRouteResult(routeValues);
 		}

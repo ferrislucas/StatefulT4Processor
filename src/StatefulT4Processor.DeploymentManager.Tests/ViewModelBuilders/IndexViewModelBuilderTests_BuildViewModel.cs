@@ -21,7 +21,7 @@ namespace StatefulT4Processor.DeploymentManager.Tests.ViewModelBuilders
 		[TestMethod]
 		public void Returns_users_from_repository()
 		{
-			mocker.GetMock<IWidgetRepository>()
+			mocker.GetMock<IDeploymentRepository>()
 				.Setup(a => a.GetAll())
 				.Returns(new Deployment[]
 				         	{

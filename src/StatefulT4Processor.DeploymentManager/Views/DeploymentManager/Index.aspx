@@ -25,6 +25,7 @@
 		   .Columns(column =>
 		   {
 			   column.For(item => Html.ActionLink(item.Name, "Modify", new { id = item.Id }, null)).Named("Name");
+			   column.For(item => item.LastModifyDate).Named("Last Modify Date");
 		   }).Attributes(id => "gridView").Render();
 		%>
 

@@ -43,7 +43,7 @@ namespace StatefulT4Processor.DeploymentManager.Tests.Controllers
 		[TestMethod]
 		public void Passes_instance_from_repository_into_mapper()
 		{
-			mocker.GetMock<IWidgetRepository>().Setup(a => a.GetAll())
+			mocker.GetMock<IDeploymentRepository>().Setup(a => a.GetAll())
 				.Returns(new Deployment[]
 				         	{
 				         		new Deployment()
@@ -66,7 +66,7 @@ namespace StatefulT4Processor.DeploymentManager.Tests.Controllers
 				         	{
 				         		Id = "test"
 				         	});
-			mocker.GetMock<IWidgetRepository>().Setup(a => a.GetAll())
+			mocker.GetMock<IDeploymentRepository>().Setup(a => a.GetAll())
 				.Returns(new Deployment[]
 				         	{
 				         		new Deployment()

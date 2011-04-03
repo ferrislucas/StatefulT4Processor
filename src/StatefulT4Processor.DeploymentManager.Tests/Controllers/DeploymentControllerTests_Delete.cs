@@ -31,7 +31,7 @@ namespace StatefulT4Processor.DeploymentManager.Tests.Controllers
 		{
 			mocker.Resolve<DeploymentManagerController>().Delete("id");
 
-			mocker.GetMock<IWidgetRepository>()
+			mocker.GetMock<IDeploymentRepository>()
 				.Verify(a => a.Delete("id"), Times.Once());
 		}
 	}

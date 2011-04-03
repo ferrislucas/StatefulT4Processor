@@ -10,18 +10,18 @@ namespace StatefulT4Processor.DeploymentManager.ViewModelBuilders
 
 	public class IndexViewModelBuilder : IIndexViewModelBuilder
 	{
-		private readonly IWidgetRepository widgetRepository;
+		private readonly IDeploymentRepository deploymentRepository;
 
-		public IndexViewModelBuilder(IWidgetRepository widgetRepository)
+		public IndexViewModelBuilder(IDeploymentRepository deploymentRepository)
 		{
-			this.widgetRepository = widgetRepository;
+			this.deploymentRepository = deploymentRepository;
 		}
 
 		public IndexViewModel BuildViewModel()
 		{
 			return new IndexViewModel()
 			       	{
-						Deployments = widgetRepository.GetAll(),
+						Deployments = deploymentRepository.GetAll(),
 			       	};
 		}
 	}

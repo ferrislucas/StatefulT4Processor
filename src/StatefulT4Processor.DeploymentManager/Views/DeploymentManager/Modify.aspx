@@ -13,7 +13,7 @@
             <p>
                 <input type="submit" value="Save" class="button" />
 				<% if (ViewContext.RouteData.Values["Action"].ToString() == "Modify") { %>
-				<input type="button" class="button important" value="Delete" onclick="if (confirm('Are you sure you want to delete this item?')) { window.location='<%=Url.Action("Delete", "User", new { id = Model.InputModel.Id }) %>'; }" />
+				<input type="button" class="button important" value="Delete" onclick="if (confirm('Are you sure you want to delete this item?')) { window.location='<%=Url.Action("Delete", ViewContext.RouteData.Values["Controller"].ToString(), new { id = Model.InputModel.Id }) %>'; }" />
 				<% } %>
             </p>
         

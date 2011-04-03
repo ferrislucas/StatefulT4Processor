@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DeploymentManagerController.cs" />
+    <Compile Include="Helpers\GetCurrentDateTime.cs" />
     <Compile Include="Helpers\GuidGetter.cs" />
     <Compile Include="Mappers\InputModelToDeploymentMapper.cs" />
     <Compile Include="Mappers\InstanceToInputModelMapper.cs" />

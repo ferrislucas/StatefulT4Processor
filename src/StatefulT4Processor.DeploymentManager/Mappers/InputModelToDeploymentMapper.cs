@@ -13,6 +13,8 @@ namespace StatefulT4Processor.DeploymentManager.Mappers
 		public override void DefineMap(AutoMapper.IConfiguration configuration)
 		{
 			configuration.CreateMap<InputModel, Deployment>()
+					.ForMember(a => a.CreateDate, b=> b.Ignore())
+					.ForMember(a => a.LastModifyDate, b => b.Ignore())
 				;
 		}
 	}

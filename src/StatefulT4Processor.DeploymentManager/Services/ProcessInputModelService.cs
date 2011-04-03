@@ -1,4 +1,5 @@
-﻿using StatefulT4Processor.DeploymentManager.Mappers;
+﻿using StatefulT4Processor.DeploymentManager.Helpers;
+using StatefulT4Processor.DeploymentManager.Mappers;
 using StatefulT4Processor.DeploymentManager.Models;
 using StatefulT4Processor.DeploymentManager.Repositories;
 
@@ -12,18 +13,24 @@ namespace StatefulT4Processor.DeploymentManager.Services
 	public class ProcessInputModelService : IProcessInputModelService
 	{
 		private readonly IInputModelToWidgetMapper inputModelToWidgetMapper;
-		private readonly IWidgetRepository widgetRepository;
+		private readonly IDeploymentRepository deploymentRepository;
+		private IGetCurrentDateTime getCurrentDateTime;
 
 		public ProcessInputModelService(IInputModelToWidgetMapper inputModelToWidgetMapper,
-										IWidgetRepository widgetRepository)
+										IDeploymentRepository deploymentRepository,
+										IGetCurrentDateTime getCurrentDateTime)
 		{
-			this.widgetRepository = widgetRepository;
+			this.getCurrentDateTime = getCurrentDateTime;
+			this.deploymentRepository = deploymentRepository;
 			this.inputModelToWidgetMapper = inputModelToWidgetMapper;
 		}
 
 		public string ProcessAndReturnId(InputModel userInputModel)
 		{
-			return widgetRepository.SaveAndReturnId(inputModelToWidgetMapper.CreateInstance(userInputModel));
+			var deployment = inputModelToWidgetMapper.CreateInstance(userInputModel);
+			deployment.CreateDate = deployment.CreateDate ?? getCurrentDateTime.Now();
+			deployment.LastModifyDate = getCurrentDateTime.Now();
+			return deploymentRepository.SaveAndReturnId(deployment);
 		}
 	}
 }
