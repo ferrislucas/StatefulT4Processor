@@ -12,7 +12,8 @@
 </style>
 
 <div style="padding-top:50px;">
-	<% using (Html.BeginForm()) { %>
+	<form Id="form" action="/<%=RouteData.Values["Controller"].ToString() %>/<%=RouteData.Values["Action"].ToString() %>" method="post" enctype="multipart/form-data">
+	<%--<% using (Html.BeginForm(RouteData.Values["Action"].ToString(), RouteData.Values["Controller"].ToString(), FormMethod.Post, new { enctype = "multipart/form-data " })) { %>--%>
 
 			<%=Html.EditorFor(a => a.ModifyInputModel) %>
             
@@ -25,8 +26,8 @@
 				<%--<input type="button" class="button important" value="Execute" onclick="if (confirm('Are you sure?')) { window.location='<%=Url.Action("Execute", "TextTemplateBatchManager", new { id = Model.ModifyInputModel.Id }) %>'; }" />--%>
 				<% } %>
             </p>
-        
-    <% } %>
+    </form>
+    <%--<% } %>--%>
 
 </div>
 </asp:Content>

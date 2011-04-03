@@ -24,8 +24,10 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Mappers
 		public override TextTemplateBatch CreateInstance(TextTemplateModifyInputModel source)
 		{
 			var mappedInstance = base.CreateInstance(source);
-			var files = HttpContext.Current.Request.Files;
-			//mappedInstance.ZipFilename = HttpContext.Current.Request.Files[""]
+			
+			if (HttpContext.Current.Request.Files.AllKeys.Where(a => a == "ModifyInputModel_ZipFile").Any())
+				mappedInstance.ZipFilename = HttpContext.Current.Request.Files["ModifyInputModel_ZipFile"].FileName;
+			
 			return mappedInstance;
 		}
 	}
