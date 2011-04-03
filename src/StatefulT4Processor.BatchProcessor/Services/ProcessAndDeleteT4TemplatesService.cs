@@ -28,6 +28,7 @@ namespace StatefulT4Processor.BatchProcessor.Services
 			foreach(var file in fileSystem.GetFiles(path))
 			{
 				t4TemplateHostWrapper.ProcessT4File(file, file.Replace(".tt", string.Empty));
+				fileSystem.DeleteFile(file);
 			}
 
 			foreach (var directory in fileSystem.GetDirectories(path))
