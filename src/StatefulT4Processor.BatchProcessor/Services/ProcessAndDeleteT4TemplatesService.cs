@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CATALYST.Core;
+using StatefulT4Processor.BatchProcessor.Helpers;
 using IFileSystem = StatefulT4Processor.Shared.IFileSystem;
 
 namespace StatefulT4Processor.BatchProcessor.Services

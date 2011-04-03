@@ -3,9 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMoq;
-using CATALYST.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using StatefulT4Processor.BatchProcessor.Helpers;
 using StatefulT4Processor.BatchProcessor.Services;
 using IFileSystem = StatefulT4Processor.Shared.IFileSystem;
 

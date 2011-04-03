@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\GetWorkingFolderPath.cs" />
+    <Compile Include="Helpers\T4TemplateHostWrapper.cs" />
     <Compile Include="Services\ExtractZipToDirectoryService.cs" />
     <Compile Include="Services\ProcessAndDeleteT4TemplatesService.cs" />
     <Compile Include="ZipBatchProcessor.cs" />
@@ -52,10 +53,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CATALYST.Core\Catalyst.Core.csproj">
-      <Project>{934A5CB9-5E95-42D8-97E3-E95892A9AD14}</Project>
-      <Name>Catalyst.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
       <Name>StatefulT4Processor.Shared</Name>

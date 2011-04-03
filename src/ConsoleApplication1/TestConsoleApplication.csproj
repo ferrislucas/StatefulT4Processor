@@ -95,10 +95,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CATALYST.Core\Catalyst.Core.csproj">
-      <Project>{934A5CB9-5E95-42D8-97E3-E95892A9AD14}</Project>
-      <Name>Catalyst.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StatefulT4Processor.BatchProcessor\StatefulT4Processor.BatchProcessor.csproj">
       <Project>{94F7EA18-D8B6-4EDA-B11A-4EC914BBB24F}</Project>
       <Name>StatefulT4Processor.BatchProcessor</Name>
