@@ -8,65 +8,42 @@ using CATALYST.Core.CodeGenerationQueue;
 using CATALYST.Core;
 using CATALYST.Core.StateSerialization;
 using EasyObjectStore.Helpers;
+using StatefulT4Processor.BatchProcessor;
+using StatefulT4Processor.BatchProcessor.Helpers;
+using StatefulT4Processor.BatchProcessor.Models;
+using StatefulT4Processor.BatchProcessor.Services;
 using StatefulT4Processor.T4StateManager;
 using StatefulT4Processor.T4StateManager.Models;
 using StatefulT4Processor.Webroot.Models;
 using FileSystem = CATALYST.Core.FileSystem;
+using GuidGetter = StatefulT4Processor.Shared.GuidGetter;
 
 namespace ConsoleApplication1
 {
 	class Program
 	{
-		private static T4ProcessState t4ProcessState;
-
 		static void Main(string[] args)
 		{
-			InitializeState(args[0]);
-
-			var errors = ConsumeQueue();
-
-			DisplayErrorsAndWaitForKeystrokeIfNecessary(errors);
+			var zipBatchProcessor = 
+				new ZipBatchProcessor(new GuidGetter(), 
+									new StatefulT4Processor.Shared.FileSystem(), 
+									new GetWorkingFolderPath(), 
+									new ExtractZipToDirectoryService(), 
+									new ProcessAndDeleteT4TemplatesService(new StatefulT4Processor.Shared.FileSystem(), new T4TemplateHostWrapper()));
+			zipBatchProcessor.ProcessBatch(new ZipBatch()
+			                               	{
+												Id = "batch_id",
+												Name = "test",
+												ZipFilename = "test.zip",
+			                               	});
 		}
+	}
 
-		private static void InitializeState(string pathToState)
+	public class GetWorkingFolderPath : IGetWorkingFolderPath
+	{
+		public string GetPathToWorkingFolder()
 		{
-			var xmlFileSerializationHelper = new XmlFileSerializationHelper();
-			t4ProcessState = xmlFileSerializationHelper.DeserializeFromPath<T4ProcessState>(pathToState);
-
-			new Core().SetState(t4ProcessState);
-		}
-
-		private static void DisplayErrorsAndWaitForKeystrokeIfNecessary(IEnumerable<string> errors)
-		{
-			foreach (var error in errors)
-			{
-				Console.WriteLine(error);
-				Console.WriteLine(string.Empty);
-			}
-			//if (errors.Count() > 0) Console.ReadLine();
-		}
-
-		private static IEnumerable<string> ConsumeQueue()
-		{
-			var codeGenerationQueueConsumer = new CodeGenerationQueueConsumer(new T4TemplateHostWrapper(), new CreateDirectoryFromFilenameAction(new FileSystem()));
-			return codeGenerationQueueConsumer.ExecuteAndReturnErrors(GenerateQueue());
-		}
-
-		public static IEnumerable<CodeGenerationQueueItem> GenerateQueue()
-		{
-			var configurationState = new ConfigurationState();
-			var queue = new List<CodeGenerationQueueItem>();
-
-			var createCodeGenerationQueueFromXml = new CreateCodeGenerationQueueFromXml(new Core(), new GetFileContents());
-			queue.AddRange(createCodeGenerationQueueFromXml.Execute(t4ProcessState.InstructionXml));
-
-			return queue;
-		}
-
-		public static T4ProcessState GetState()
-		{
-			var core = new CATALYST.Core.Core();
-			return core.GetState();
+			return @"C:\Users\lucasf\Desktop\junk\";
 		}
 	}
 }
