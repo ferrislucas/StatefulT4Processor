@@ -17,6 +17,7 @@
             </div>
             <div class="editor-field">
 				<input type="file" name="ModifyInputModel_ZipFile" /> <%=Model.ZipFilename %>
+				<%: Html.HiddenFor(model => model.ZipFilename) %>
                 <%: Html.ValidationMessageFor(model => model.ZipFile) %>
             </div>
         

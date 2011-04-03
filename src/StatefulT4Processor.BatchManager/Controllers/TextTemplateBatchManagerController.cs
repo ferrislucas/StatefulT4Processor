@@ -24,7 +24,7 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Controllers
     	private readonly ITextTemplateBatchRepository textTemplateBatchRepository;
     	private readonly IProcessTextTemplateBatchModifyInputModelService processTextTemplateBatchModifyInputModelService;
     	private readonly IGetWorkingFolderPath getWorkingFolderPath;
-    	private IFileSystem fileSystem;
+    	private readonly IFileSystem fileSystem;
 
     	public TextTemplateBatchManagerController(IIndexViewModelBuilder indexViewModelBuilder, 
 													IGuidGetter guidGetter,
@@ -93,7 +93,7 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Controllers
 			{
 				var batchId = processTextTemplateBatchModifyInputModelService.ProcessAndReturnId(modifyInputModel);
 
-				if (HttpContext.Request.Files.AllKeys.Where(a => a == "ModifyInputModel_ZipFile").Any())
+				if ((HttpContext.Request.Files.AllKeys.Where(a => a == "ModifyInputModel_ZipFile").Any()) && (!string.IsNullOrEmpty(HttpContext.Request.Files["ModifyInputModel_ZipFile"].FileName)))
 				{
 					var path = getWorkingFolderPath.GetPathToWorkingFolder() +
 					           TextTemplateBatchManagerSettings.TextTemplateBatchFileUploadFolderName + Path.DirectorySeparatorChar +

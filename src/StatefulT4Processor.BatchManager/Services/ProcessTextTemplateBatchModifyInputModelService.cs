@@ -28,6 +28,8 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Services
 		public string ProcessAndReturnId(TextTemplateModifyInputModel modifyInputModel)
 		{
 			var textTemplateBatch = textTemplateBatchModifyInputModelToTextTemplateBatchMapper.CreateInstance(modifyInputModel);
+			textTemplateBatch.CreateDate = textTemplateBatch.CreateDate ?? DateTime.Now;
+			textTemplateBatch.LastModifyDate = DateTime.Now;
 			return textTemplateBatchRepository.SaveAndReturnId(textTemplateBatch);
 		}
 	}
