@@ -62,12 +62,12 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Tests
 			                                                        	});
 
 			mocker.GetMock<ITextTemplateZipProcessor>()
-				.Verify(a => a.ProcessZip("workingFolderPath" + "BatchProcessFileUploads" + Path.DirectorySeparatorChar + "id" + Path.DirectorySeparatorChar + "filename.zip", string.Format("workingFolderPath" + "BatchProcessTemp" + Path.DirectorySeparatorChar + "{0}", guid)), Times.Once());
+				.Verify(a => a.ProcessZip("workingFolderPath" + TextTemplateBatchManagerSettings.TextTemplateBatchFileUploadFolderName + Path.DirectorySeparatorChar + "id" + Path.DirectorySeparatorChar + "filename.zip", string.Format("workingFolderPath" + TextTemplateBatchManagerSettings.TextTemplateBatchProcessTemporaryFolderName + Path.DirectorySeparatorChar + "{0}", guid)), Times.Once());
 		}
 
 		private string GetTemporaryWorkingFolderPath()
 		{
-			return string.Format("pathToWorkingFolder" + "BatchProcessTemp" + Path.DirectorySeparatorChar + "{0}", guid);
+			return string.Format("pathToWorkingFolder" + TextTemplateBatchManagerSettings.TextTemplateBatchProcessTemporaryFolderName + Path.DirectorySeparatorChar + "{0}", guid);
 		}
 	}
 }

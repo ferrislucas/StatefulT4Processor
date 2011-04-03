@@ -27,14 +27,14 @@ namespace StatefulT4Processor.TextTemplateBatchManager.Services
 		public string ProcessBatch(TextTemplateBatch textTemplateBatch)
 		{
 			var pathToExtractZipTo = getWorkingFolderPath.GetPathToWorkingFolder() + 
-											"BatchProcessTemp" + 
+											TextTemplateBatchManagerSettings.TextTemplateBatchProcessTemporaryFolderName + 
 											Path.DirectorySeparatorChar + 
 											guidGetter.GetGuid();
 
 			fileSystem.CreateFolder(pathToExtractZipTo);
 
 			var pathToZip = getWorkingFolderPath.GetPathToWorkingFolder() + 
-										"BatchProcessFileUploads" + 
+										TextTemplateBatchManagerSettings.TextTemplateBatchFileUploadFolderName + 
 										Path.DirectorySeparatorChar + 
 										textTemplateBatch.Id +
 										Path.DirectorySeparatorChar + textTemplateBatch.ZipFilename;
