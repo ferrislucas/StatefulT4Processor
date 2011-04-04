@@ -7,6 +7,7 @@ namespace StatefulT4Processor.DeploymentManager.Models
 {
 	public class ExecuteViewModel
 	{
+		public string OutputPath { get; set; }
 		public IEnumerable<string> Errors { get; set; }
 	}
 }

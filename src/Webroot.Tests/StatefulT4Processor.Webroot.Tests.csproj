@@ -63,20 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\T4StateManagementControllerTests_Create.cs" />
-    <Compile Include="Controllers\T4StateManagementControllerTests_Delete.cs" />
-    <Compile Include="Controllers\T4StateManagementControllerTests_Index.cs" />
-    <Compile Include="Controllers\T4StateManagementControllerTests_Modify_post_method.cs" />
-    <Compile Include="Controllers\T4StateManagementControlTests_Modify.cs" />
-    <Compile Include="Mappers\WidgetInputModelToUserMapperTests.cs" />
-    <Compile Include="Mappers\WidgetToUserInputModelMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ProcessInputModelServiceTests_ProcessAndReturnId.cs" />
-    <Compile Include="Validators\InputModelValidatorTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ViewModelBuilders\IndexViewModelBuilderTests_BuildViewModel.cs" />
-    <Compile Include="ViewModelBuilders\ModifyViewModelBuilderTests_BuildViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

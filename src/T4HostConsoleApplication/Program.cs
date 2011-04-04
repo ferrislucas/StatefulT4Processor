@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Xml.Serialization;
 using CATALYST.Core;
 
@@ -13,7 +14,8 @@ namespace T4HostConsoleApplication
 		static void Main(string[] args)
 		{
 			//Console.WriteLine("press a key");
-			//Console.ReadKey();
+			//Console.ReadLine();
+			//Thread.Sleep(10000);
 			var resultXml = string.Empty;
 			try
 			{

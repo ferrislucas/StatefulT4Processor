@@ -9,18 +9,10 @@
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #> 
 <#@ assembly name="C:\_Application\StatefulT4Processor\src\StatefulT4Processor.T4StateManager\bin\Debug\StatefulT4Processor.T4StateManager.dll" #>
-<#@ assembly name="C:\_Application\StatefulT4Processor\src\CATALYST.Core\bin\Debug\CATALYST.Core.dll" #>
 <#
- 	var state = new CATALYST.Core.Core().GetState();
-	
-	string ProjectId = state.ProjectId+"";
-	string Namespace = state.Namespace+"";
-	string Classname = state.Classname+"";
-	string InterfaceName = state.ReplaceTag1+"";	
-
+	var t4StateContext = new StatefulT4Processor.T4StateManager.T4StateContext();
+	var test = t4StateContext.GetStringFromState("test");
 #>
 
 
-Project Id: <#=ProjectId #>
-Namespace: <#=Namespace #>
-Classname: <#=Classname #>
+The test value is ... "<#=test #>"

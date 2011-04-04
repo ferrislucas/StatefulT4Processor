@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 using StatefulT4Processor.DeploymentManager.Mappers;
@@ -9,6 +10,7 @@ using StatefulT4Processor.DeploymentManager.Repositories;
 using StatefulT4Processor.DeploymentManager.Services;
 using StatefulT4Processor.DeploymentManager.ViewModelBuilders;
 using StatefulT4Processor.Shared;
+using StatefulT4Processor.T4StateManager;
 using StatefulT4Processor.TextTemplateBatchManager.Helpers;
 using StatefulT4Processor.TextTemplateBatchManager.Shared;
 using StatefulT4Processor.TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor;
@@ -28,6 +30,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly ITextTemplateBatchContext textTemplateBatchContext;
     	private readonly IGetWorkingFolderPath getWorkingFolderPath;
     	private readonly IFileSystem fileSystem;
+    	private IT4StateContext t4StateContext;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,
@@ -38,8 +41,10 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 								ITextTemplateZipProcessor textTemplateZipProcessor,
 								ITextTemplateBatchContext textTemplateBatchContext,
 								IGetWorkingFolderPath getWorkingFolderPath,
-								IFileSystem fileSystem)
+								IFileSystem fileSystem,
+								IT4StateContext t4StateContext)
     	{
+    		this.t4StateContext = t4StateContext;
     		this.fileSystem = fileSystem;
     		this.getWorkingFolderPath = getWorkingFolderPath;
     		this.textTemplateBatchContext = textTemplateBatchContext;
@@ -58,6 +63,8 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 
 			var batch = textTemplateBatchContext.GetAll().Where(a => a.Id == deployment.TextTemplateBatchId).FirstOrDefault();
 
+			t4StateContext.SetState(deployment.StateXml);
+
 			var zipFilePath = getWorkingFolderPath.GetPathToWorkingFolder() + "TextTemplateBatchFileUploads" + Path.DirectorySeparatorChar + batch.Id + Path.DirectorySeparatorChar + batch.ZipFilename;
 			var outputPath = getWorkingFolderPath.GetPathToWorkingFolder() + "T4Output" + Path.DirectorySeparatorChar + deployment.Id + Path.DirectorySeparatorChar;
 
@@ -65,8 +72,14 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 				fileSystem.DeleteDirectory(outputPath);
 
 			var errors = textTemplateZipProcessor.ProcessZip(zipFilePath, outputPath);
+			//if (errors.Count() == 0)
+			//{
+			//    return File(outputPath, "application/zip", "pack.zip");
+			//}
+
 			return View("Execute", new ExecuteViewModel()
 			                       	{
+										OutputPath = outputPath,
 			                       		Errors = errors,
 			                       	});
 		}

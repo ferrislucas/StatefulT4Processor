@@ -102,36 +102,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\T4StateManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\InputModelToUserMapper.cs" />
-    <Compile Include="Mappers\InstanceToUserInputModelMapper.cs" />
-    <Compile Include="Models\ExecuteViewModel.cs" />
-    <Compile Include="Models\IndexViewModel.cs" />
-    <Compile Include="Models\InputModel.cs" />
-    <Compile Include="Models\ModifyViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\EasyObjectStoreRegistrationAndConfiguration.cs" />
     <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
-    <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Routing\RegisterRoutes.cs" />
-    <Compile Include="Services\ProcessInputModelService.cs" />
     <None Include="Target_\Active\AppSettings.config">
       <SubType>Designer</SubType>
     </None>
-    <Compile Include="Validators\InputModelValidator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ViewModelBuilders\IndexViewModelBuilder.cs" />
-    <Compile Include="ViewModelBuilders\ModifyViewModelBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Views\T4StateManagement\Execute.aspx" />
-    <Content Include="Views\T4StateManagement\Index.aspx" />
-    <Content Include="Views\T4StateManagement\Modify.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -159,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StatefulT4Processor.BatchManager\StatefulT4Processor.TextTemplateBatchManager.csproj">

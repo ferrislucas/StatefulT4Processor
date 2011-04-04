@@ -12,7 +12,7 @@
 						Text = "- please select -",
 					},
 	}).Union(
-				ServiceLocatorManager.Current.Resolve<ITextTemplateBatchContext>().GetAll()
+				ServiceLocatorManager.Current.Resolve<ITextTemplateBatchContext>().GetAll().OrderBy(a => a.Name)
 				.Select(a => new SelectListItem()
 				             	{
 				             		Selected = (Model == a.Id), Text = a.Name, Value = a.Id

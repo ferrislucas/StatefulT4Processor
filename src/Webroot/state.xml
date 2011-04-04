@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<dictionary>
+  <item>
+    <key>
+      <string>test</string>
+    </key>
+    <value>
+      <string>TEST VALUE</string>
+    </value>
+  </item>
+</dictionary>

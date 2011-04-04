@@ -39,6 +39,10 @@
     <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=8.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\lib\Microsoft.VisualStudio.TextTemplating.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.TextTemplating, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Mono.TextTemplating.dll</HintPath>
+    </Reference>
     <Reference Include="MvcTurbine">
       <HintPath>..\Webroot\bin\MvcTurbine.dll</HintPath>
     </Reference>
@@ -56,53 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\Config\GetPathToEdmxFileAction.cs" />
-    <Compile Include="Actions\EdmxIntegration\ConvertEntityTypeNameToCLRTypeNameAction.cs" />
-    <Compile Include="Actions\EdmxIntegration\ConvertEntityTypeNameToInstinctDateFieldType.cs" />
-    <Compile Include="Actions\EdmxIntegration\GetViewerFieldControlTypeByEntityPropertyAction.cs" />
-    <Compile Include="Actions\EdmxIntegration\RetrieveNavigationPropertiesByEntityName.cs" />
-    <Compile Include="Actions\FileSystem\CreateDirectoryFromFilenameAction.cs" />
-    <Compile Include="Actions\FileSystem\RemoveAllFilesButLeaveDirectoryStructureAction.cs" />
-    <Compile Include="Actions\EdmxIntegration\RetrieveConceptualEntityPropertiesByEntityNameAction.cs" />
-    <Compile Include="CodeGenerationQueue\CreateCodeGenerationQueueFromXmlFile.cs" />
-    <Compile Include="ConfigurationState.cs" />
-    <Compile Include="Core.cs" />
-    <Compile Include="FileSystem.cs" />
-    <Compile Include="Objects\InstinctDataFieldType.cs" />
-    <Compile Include="Plurality\PluralizeWord.cs" />
-    <Compile Include="Plurality\UnpluralizeWord.cs" />
-    <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
-    <Compile Include="StateSerialization\SerializeStateToFile.cs" />
-    <Compile Include="StateSerialization\GetFileContents.cs" />
-    <Compile Include="StateSerialization\GetStateSerializationFilePath.cs" />
-    <Compile Include="StateSerialization\DeserializeStateFromFile.cs" />
     <Compile Include="T4TemplateHostWrapper.cs" />
-    <Compile Include="CodeGenerationQueue\CodeGenerationQueueItem.cs" />
-    <Compile Include="Objects\EntityProperty.cs" />
-    <Compile Include="Objects\ViewerControlTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Objects\State.cs" />
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntityBusinessLayerSMSActions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntityDataLayer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntitySMSAppCodeLayer.cs" />
-    <Compile Include="CodeGenerationQueue\GenerateCodeGenerationQueueEntityWebRootSMSLayerActions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CodeGenerationQueue\CodeGenerationQueueConsumer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
-      <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
-      <Name>StatefulT4Processor.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj">
-      <Project>{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}</Project>
-      <Name>StatefulT4Processor.T4StateManager</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
