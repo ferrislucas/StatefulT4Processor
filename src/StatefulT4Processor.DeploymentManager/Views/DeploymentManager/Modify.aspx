@@ -2,6 +2,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+<style>
+	#InputModel_StateXml 
+	{
+		width:100%;
+		height:300px;
+	}
+</style>
+
 <div style="padding-top:50px;">
     
 	<% using (Html.BeginForm()) {%>
@@ -20,5 +28,24 @@
     <% } %>
 
 </div>
+
+<div style="padding-top:20px;">
+Example State:<br />
+<textarea style="width:300px;height:200px;">
+<%: @"<?xml version=""1.0""?>
+<dictionary>
+  <item>
+    <key>
+      <string>KEY</string>
+    </key>
+    <value>
+      <string>VALUE</string>
+    </value>
+  </item>
+</dictionary>
+" %>
+</textarea>
+</div>
+
 </asp:Content>
 

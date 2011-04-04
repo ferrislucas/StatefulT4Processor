@@ -51,6 +51,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 		}
 
 		[HttpPost]
+		[ValidateInput(false)]
 		public ActionResult Create(InputModel inputModel)
 		{
 			return Modify(inputModel);
@@ -64,6 +65,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 		}
 
 		[HttpPost]
+		[ValidateInput(false)]
 		public ActionResult Modify(InputModel inputModel)
 		{
 			if (ModelState.IsValid)
