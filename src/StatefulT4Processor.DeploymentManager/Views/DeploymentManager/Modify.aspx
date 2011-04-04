@@ -42,8 +42,7 @@ Example State:<br />
       <string>VALUE</string>
     </value>
   </item>
-</dictionary>
-" %>
+</dictionary>" %>
 </textarea>
 </div>
 
