@@ -10,6 +10,10 @@ namespace StatefulT4Processor.DeploymentManager.Models
 		public string Id { get; set; }
 		public string Name { get; set; }
 
+		[DisplayName("Batch")]
+		[UIHint("TextTemplateBatchId")]
+		public string TextTemplateBatchId { get; set; }
+
 		[DisplayName("State")]
 		[DataType(DataType.MultilineText)]
 		public string StateXml { get; set; }

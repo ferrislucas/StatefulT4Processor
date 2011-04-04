@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using StatefulT4Processor.DeploymentManager.Helpers;
@@ -7,6 +9,9 @@ using StatefulT4Processor.DeploymentManager.Models;
 using StatefulT4Processor.DeploymentManager.Repositories;
 using StatefulT4Processor.DeploymentManager.Services;
 using StatefulT4Processor.DeploymentManager.ViewModelBuilders;
+using StatefulT4Processor.TextTemplateBatchManager.Helpers;
+using StatefulT4Processor.TextTemplateBatchManager.Shared;
+using StatefulT4Processor.TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor;
 
 namespace StatefulT4Processor.DeploymentManager.Controllers
 {
@@ -18,14 +23,23 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly IDeploymentRepository deploymentRepository;
     	private readonly IInstanceToWidgetInputModelMapper instanceToWidgetInputModelMapper;
     	private readonly IGuidGetter guidGetter;
+    	private ITextTemplateZipProcessor textTemplateZipProcessor;
+    	private ITextTemplateBatchContext textTemplateBatchContext;
+    	private IGetWorkingFolderPath getWorkingFolderPath;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,
 								IProcessInputModelService processInputModelService,
 								IDeploymentRepository deploymentRepository,
 								IInstanceToWidgetInputModelMapper instanceToWidgetInputModelMapper,
-								IGuidGetter guidGetter)
+								IGuidGetter guidGetter,
+								ITextTemplateZipProcessor textTemplateZipProcessor,
+								ITextTemplateBatchContext textTemplateBatchContext,
+								IGetWorkingFolderPath getWorkingFolderPath)
     	{
+    		this.getWorkingFolderPath = getWorkingFolderPath;
+    		this.textTemplateBatchContext = textTemplateBatchContext;
+    		this.textTemplateZipProcessor = textTemplateZipProcessor;
     		this.guidGetter = guidGetter;
     		this.instanceToWidgetInputModelMapper = instanceToWidgetInputModelMapper;
     		this.deploymentRepository = deploymentRepository;
@@ -33,6 +47,22 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     		this.modifyViewModelBuilder = modifyViewModelBuilder;
     		this.indexViewModelBuilder = indexViewModelBuilder;
     	}
+
+		public ActionResult Execute(string id)
+		{
+			var deployment = deploymentRepository.GetAll().Where(a => a.Id == id).FirstOrDefault();
+
+			var batch = textTemplateBatchContext.GetAll().Where(a => a.Id == deployment.TextTemplateBatchId).FirstOrDefault();
+
+			var zipFilePath = getWorkingFolderPath.GetPathToWorkingFolder() + "TextTemplateBatchFileUploads" + Path.DirectorySeparatorChar + batch.Id + Path.DirectorySeparatorChar + batch.ZipFilename;
+			var outputPath = getWorkingFolderPath.GetPathToWorkingFolder() + "T4Output" + Path.DirectorySeparatorChar + deployment.Id + Path.DirectorySeparatorChar;
+
+			var errors = textTemplateZipProcessor.ProcessZip(zipFilePath, outputPath);
+			return View("Execute", new ExecuteViewModel()
+			                       	{
+			                       		Errors = errors,
+			                       	});
+		}
 
     	public ActionResult Index()
         {

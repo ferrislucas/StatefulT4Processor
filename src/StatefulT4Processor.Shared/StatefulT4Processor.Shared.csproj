@@ -35,6 +35,7 @@
       <HintPath>..\..\lib\MvcTurbine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileSystem.cs" />
+    <Compile Include="GetWorkingFolderPath.cs" />
     <Compile Include="GuidGetter.cs" />
     <Compile Include="InterfaceToSingleImplementationRegistrationConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

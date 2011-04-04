@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contexts\TextTemplateBatchContextTests_GetAll.cs" />
     <Compile Include="Mappers\TextTemplateBatchModifyInputModelToTextTemplateBatchMapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TextTemplateBatchProcessorTests.cs" />
@@ -79,6 +80,10 @@
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
       <Name>StatefulT4Processor.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatefulT4Processor.TextTemplateBatchManager.Shared\StatefulT4Processor.TextTemplateBatchManager.Shared.csproj">
+      <Project>{4B32D52A-64D4-423F-813D-F7F8EBD956AF}</Project>
+      <Name>StatefulT4Processor.TextTemplateBatchManager.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

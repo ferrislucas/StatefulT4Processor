@@ -29,7 +29,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Helpers
 					RedirectStandardOutput = true
 				}
 			};
-			p.StartInfo.Arguments = p.StartInfo.Arguments + " " + p.Id;
+			//p.StartInfo.Arguments = p.StartInfo.Arguments + " " + p.Id;
 			p.Start();
 			
 			var consoleOutput = p.StandardOutput.ReadToEnd();

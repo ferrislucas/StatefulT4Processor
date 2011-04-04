@@ -30,20 +30,20 @@
 </div>
 
 <div style="padding-top:20px;">
-Example State:<br />
-<textarea style="width:300px;height:200px;">
-<%: @"<?xml version=""1.0""?>
-<dictionary>
-  <item>
-    <key>
-      <string>KEY</string>
-    </key>
-    <value>
-      <string>VALUE</string>
-    </value>
-  </item>
-</dictionary>" %>
-</textarea>
+	Example State:<br />
+	<textarea style="width:300px;height:200px;">
+	<%: @"<?xml version=""1.0""?>
+	<dictionary>
+	  <item>
+		<key>
+		  <string>KEY</string>
+		</key>
+		<value>
+		  <string>VALUE</string>
+		</value>
+	  </item>
+	</dictionary>" %>
+	</textarea>
 </div>
 
 </asp:Content>
