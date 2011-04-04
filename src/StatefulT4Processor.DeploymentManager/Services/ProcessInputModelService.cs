@@ -14,7 +14,7 @@ namespace StatefulT4Processor.DeploymentManager.Services
 	{
 		private readonly IInputModelToWidgetMapper inputModelToWidgetMapper;
 		private readonly IDeploymentRepository deploymentRepository;
-		private IGetCurrentDateTime getCurrentDateTime;
+		private readonly IGetCurrentDateTime getCurrentDateTime;
 
 		public ProcessInputModelService(IInputModelToWidgetMapper inputModelToWidgetMapper,
 										IDeploymentRepository deploymentRepository,

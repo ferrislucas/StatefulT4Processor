@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace StatefulT4Processor.DeploymentManager.Models
 {
@@ -6,7 +8,10 @@ namespace StatefulT4Processor.DeploymentManager.Models
 	{
 		[HiddenInput(DisplayValue = false)]
 		public string Id { get; set; }
-
 		public string Name { get; set; }
+
+		[DisplayName("State")]
+		[DataType(DataType.MultilineText)]
+		public string StateXml { get; set; }
 	}
 }
