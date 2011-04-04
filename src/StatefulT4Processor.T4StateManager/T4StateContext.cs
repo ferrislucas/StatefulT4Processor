@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -45,9 +46,10 @@ namespace StatefulT4Processor.T4StateManager
 
 		private static string GetPathToStateXmlFile()
 		{
-			return AppDomain.CurrentDomain.BaseDirectory
-				   + Path.DirectorySeparatorChar
-				   + "state.xml";
+			return ConfigurationManager.AppSettings["PathToT4HostConsoleApplicationStateFile"];
+			//return AppDomain.CurrentDomain.BaseDirectory
+			//       + Path.DirectorySeparatorChar
+			//       + "state.xml";
 		}
 	}
 }

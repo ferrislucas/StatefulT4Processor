@@ -30,7 +30,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly ITextTemplateBatchContext textTemplateBatchContext;
     	private readonly IGetWorkingFolderPath getWorkingFolderPath;
     	private readonly IFileSystem fileSystem;
-    	private IT4StateContext t4StateContext;
+    	private readonly IT4StateContext t4StateContext;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,
