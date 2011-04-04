@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EasyObjectStore.Helpers;
-using StatefulT4Processor.BatchProcessor;
-using StatefulT4Processor.BatchProcessor.Helpers;
-using StatefulT4Processor.BatchProcessor.Models;
-using StatefulT4Processor.BatchProcessor.Services;
-using StatefulT4Processor.T4StateManager;
-using StatefulT4Processor.T4StateManager.Models;
+using StatefulT4Processor.TextTemplateBatchManager.Helpers;
+using StatefulT4Processor.TextTemplateZipProcessor.Helpers;
+using StatefulT4Processor.TextTemplateZipProcessor.Services;
+using StatefulT4Processor.TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor;
 using StatefulT4Processor.Webroot.Models;
+using FileSystem = StatefulT4Processor.Shared.FileSystem;
 using GuidGetter = StatefulT4Processor.Shared.GuidGetter;
 
 namespace ConsoleApplication1
@@ -18,18 +17,8 @@ namespace ConsoleApplication1
 	{
 		static void Main(string[] args)
 		{
-			var zipBatchProcessor = 
-				new ZipBatchProcessor_remove(new GuidGetter(), 
-									new StatefulT4Processor.Shared.FileSystem(), 
-									new GetWorkingFolderPath(), 
-									new ExtractZipToDirectoryService(), 
-									new ProcessAndDeleteT4TemplatesService(new StatefulT4Processor.Shared.FileSystem(), new T4TemplateHostWrapper()));
-			zipBatchProcessor.ProcessBatch(new ZipBatch()
-			                               	{
-												Id = "batch_id",
-												Name = "test",
-												ZipFilename = "test.zip",
-			                               	});
+			var textTemplateZipProcessor = new TextTemplateZipProcessor(new ExtractZipToDirectoryService(), new ProcessAndDeleteT4TemplatesService(new FileSystem(), new T4TemplateHostWrapper()));
+			textTemplateZipProcessor.ProcessZip(@"C:\_Application\StatefulT4Processor\localWorkingFolder\TextTemplateBatchFileUploads\8f37c08d-5769-4e80-86f6-744bc522e81d\test4.zip", @"C:\Users\lucasf\Desktop\junk");
 		}
 	}
 

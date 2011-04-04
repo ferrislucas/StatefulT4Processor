@@ -23,6 +23,7 @@ namespace StatefulT4Processor.Shared
 		FileInformation GetFileInformation(string path);
 		bool FileExists(string path);
 		bool DirectoryExists(string path);
+		void DeleteDirectory(string path);
 		string[] GetDirectories(string path);
 	}
 
@@ -34,6 +35,19 @@ namespace StatefulT4Processor.Shared
 
 	public class FileSystem : IFileSystem
 	{
+		public void DeleteDirectory(string path)
+		{
+			foreach (var file in GetFiles(path))
+			{
+				File.Delete(file);
+			}
+			foreach (var directory in GetDirectories(path))
+			{
+				DeleteDirectory(directory);
+			}
+			Directory.Delete(path);
+		}
+
 		public bool DirectoryExists(string path)
 		{
 			return Directory.Exists(path);

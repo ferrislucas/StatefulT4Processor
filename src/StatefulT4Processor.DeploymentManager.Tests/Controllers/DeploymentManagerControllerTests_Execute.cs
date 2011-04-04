@@ -19,7 +19,7 @@ namespace StatefulT4Processor.DeploymentManager.Tests.Controllers
 			mocker = new AutoMoqer();
 		}
 
-		[TestMethod]
+		//[TestMethod]
 		public void TestMethod1()
 		{
 			var result = mocker.Resolve<DeploymentManagerController>().Execute("id");

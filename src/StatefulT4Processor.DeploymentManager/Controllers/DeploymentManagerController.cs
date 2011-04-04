@@ -3,15 +3,16 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using StatefulT4Processor.DeploymentManager.Helpers;
 using StatefulT4Processor.DeploymentManager.Mappers;
 using StatefulT4Processor.DeploymentManager.Models;
 using StatefulT4Processor.DeploymentManager.Repositories;
 using StatefulT4Processor.DeploymentManager.Services;
 using StatefulT4Processor.DeploymentManager.ViewModelBuilders;
+using StatefulT4Processor.Shared;
 using StatefulT4Processor.TextTemplateBatchManager.Helpers;
 using StatefulT4Processor.TextTemplateBatchManager.Shared;
 using StatefulT4Processor.TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor;
+using IGuidGetter = StatefulT4Processor.DeploymentManager.Helpers.IGuidGetter;
 
 namespace StatefulT4Processor.DeploymentManager.Controllers
 {
@@ -23,9 +24,10 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly IDeploymentRepository deploymentRepository;
     	private readonly IInstanceToWidgetInputModelMapper instanceToWidgetInputModelMapper;
     	private readonly IGuidGetter guidGetter;
-    	private ITextTemplateZipProcessor textTemplateZipProcessor;
-    	private ITextTemplateBatchContext textTemplateBatchContext;
-    	private IGetWorkingFolderPath getWorkingFolderPath;
+    	private readonly ITextTemplateZipProcessor textTemplateZipProcessor;
+    	private readonly ITextTemplateBatchContext textTemplateBatchContext;
+    	private readonly IGetWorkingFolderPath getWorkingFolderPath;
+    	private readonly IFileSystem fileSystem;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,
@@ -35,8 +37,10 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 								IGuidGetter guidGetter,
 								ITextTemplateZipProcessor textTemplateZipProcessor,
 								ITextTemplateBatchContext textTemplateBatchContext,
-								IGetWorkingFolderPath getWorkingFolderPath)
+								IGetWorkingFolderPath getWorkingFolderPath,
+								IFileSystem fileSystem)
     	{
+    		this.fileSystem = fileSystem;
     		this.getWorkingFolderPath = getWorkingFolderPath;
     		this.textTemplateBatchContext = textTemplateBatchContext;
     		this.textTemplateZipProcessor = textTemplateZipProcessor;
@@ -56,6 +60,9 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 
 			var zipFilePath = getWorkingFolderPath.GetPathToWorkingFolder() + "TextTemplateBatchFileUploads" + Path.DirectorySeparatorChar + batch.Id + Path.DirectorySeparatorChar + batch.ZipFilename;
 			var outputPath = getWorkingFolderPath.GetPathToWorkingFolder() + "T4Output" + Path.DirectorySeparatorChar + deployment.Id + Path.DirectorySeparatorChar;
+
+			if (fileSystem.DirectoryExists(outputPath))
+				fileSystem.DeleteDirectory(outputPath);
 
 			var errors = textTemplateZipProcessor.ProcessZip(zipFilePath, outputPath);
 			return View("Execute", new ExecuteViewModel()
