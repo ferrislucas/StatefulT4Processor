@@ -72,11 +72,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 				fileSystem.DeleteDirectory(outputPath);
 
 			var errors = textTemplateZipProcessor.ProcessZip(zipFilePath, outputPath);
-			//if (errors.Count() == 0)
-			//{
-			//    return File(outputPath, "application/zip", "pack.zip");
-			//}
-
+			
 			return View("Execute", new ExecuteViewModel()
 			                       	{
 										OutputPath = outputPath,

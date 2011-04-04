@@ -13,9 +13,8 @@ namespace T4HostConsoleApplication
 	{
 		static void Main(string[] args)
 		{
-			//Console.WriteLine("press a key");
-			//Console.ReadLine();
-			//Thread.Sleep(10000);
+			//Thread.Sleep(15000);
+			
 			var resultXml = string.Empty;
 			try
 			{

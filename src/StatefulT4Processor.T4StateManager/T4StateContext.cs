@@ -46,7 +46,8 @@ namespace StatefulT4Processor.T4StateManager
 
 		private static string GetPathToStateXmlFile()
 		{
-			return ConfigurationManager.AppSettings["PathToT4HostConsoleApplicationStateFile"];
+			return @"C:\_Application\StatefulT4Processor\src\T4HostConsoleApplication\bin\Debug\state.xml";
+			//return ConfigurationManager.AppSettings["PathToT4HostConsoleApplicationStateFile"];
 			//return AppDomain.CurrentDomain.BaseDirectory
 			//       + Path.DirectorySeparatorChar
 			//       + "state.xml";
