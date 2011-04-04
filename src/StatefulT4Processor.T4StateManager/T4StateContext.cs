@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using StatefulT4Processor.T4StateManager.Models;
 
 namespace StatefulT4Processor.T4StateManager
 {
@@ -37,11 +38,19 @@ namespace StatefulT4Processor.T4StateManager
 
 			using (var memoryStream = new MemoryStream(ASCIIEncoding.Default.GetBytes(fileContents)))
 			{
-				var deserializer = new XmlSerializer(typeof(SerializableDictionary<string, string>));
-				var data = (SerializableDictionary<string, string>)deserializer.Deserialize(memoryStream);
+				var deserializer = new XmlSerializer(typeof(string[][]));
+				var data = (string[][])deserializer.Deserialize(memoryStream);
 
-				return data[key];
+				return data[0][1];
 			}
+
+			//using (var memoryStream = new MemoryStream(ASCIIEncoding.Default.GetBytes(fileContents)))
+			//{
+			//    var deserializer = new XmlSerializer(typeof(SerializableDictionary<string, string>));
+			//    var data = (SerializableDictionary<string, string>)deserializer.Deserialize(memoryStream);
+
+			//    return data[key];
+			//}
 		}
 
 		private static string GetPathToStateXmlFile()
