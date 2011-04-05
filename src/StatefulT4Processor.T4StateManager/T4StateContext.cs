@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using StatefulT4Processor.T4StateManager.Models;
+using StatefulT4Processor.T4StateManager.Helpers;
 
 namespace StatefulT4Processor.T4StateManager
 {
@@ -17,6 +17,13 @@ namespace StatefulT4Processor.T4StateManager
 
 	public class T4StateContext : IT4StateContext
 	{
+		private readonly GetValueFromTwoDimensionalStringArrayAsIfItWereAHash getValueFromTwoDimensionalStringArrayAsIfItWereAHash;
+
+		public T4StateContext()
+		{
+			getValueFromTwoDimensionalStringArrayAsIfItWereAHash = new GetValueFromTwoDimensionalStringArrayAsIfItWereAHash();
+		}
+
 		public void SetState(string xml)
 		{
 			var path = GetPathToStateXmlFile();
@@ -41,16 +48,8 @@ namespace StatefulT4Processor.T4StateManager
 				var deserializer = new XmlSerializer(typeof(string[][]));
 				var data = (string[][])deserializer.Deserialize(memoryStream);
 
-				return data[0][1];
+				return getValueFromTwoDimensionalStringArrayAsIfItWereAHash.GetValue(data, key);
 			}
-
-			//using (var memoryStream = new MemoryStream(ASCIIEncoding.Default.GetBytes(fileContents)))
-			//{
-			//    var deserializer = new XmlSerializer(typeof(SerializableDictionary<string, string>));
-			//    var data = (SerializableDictionary<string, string>)deserializer.Deserialize(memoryStream);
-
-			//    return data[key];
-			//}
 		}
 
 		private static string GetPathToStateXmlFile()

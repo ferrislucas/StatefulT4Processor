@@ -31,18 +31,14 @@
 
 <div style="padding-top:20px;">
 	Example State:<br />
-	<textarea style="width:300px;height:200px;">
+	<textarea style="width:100%;height:200px;">
 	<%: @"<?xml version=""1.0""?>
-	<dictionary>
-	  <item>
-		<key>
-		  <string>KEY</string>
-		</key>
-		<value>
-		  <string>VALUE</string>
-		</value>
-	  </item>
-	</dictionary>" %>
+<ArrayOfArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <ArrayOfString>
+    <string>KEY</string>
+    <string>VALUE</string>
+  </ArrayOfString>
+</ArrayOfArrayOfString>" %>
 	</textarea>
 </div>
 
