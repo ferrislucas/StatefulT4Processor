@@ -45,6 +45,24 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests.Services
 		}
 
 		[TestMethod]
+		public void Does_not_processes_files_that_do_not_end_in_text_template_extension()
+		{
+			mocker.GetMock<IFileSystem>()
+				.Setup(a => a.GetFiles("path"))
+				.Returns(new string[]
+				         	{
+				         		"file1.cs",
+								"file2.cs.tt"
+							});
+
+			mocker.Resolve<ProcessAndDeleteT4TemplatesService>()
+				.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors("path");
+
+			mocker.GetMock<IT4TemplateHostWrapper>()
+				.Verify(a => a.ProcessT4File("file1.cs", It.IsAny<string>()), Times.Never());
+		}
+
+		[TestMethod]
 		public void Processes_t4_templates_in_child_directory_of_provided_path()
 		{
 			mocker.GetMock<IFileSystem>()
