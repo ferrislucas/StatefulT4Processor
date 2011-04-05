@@ -35,27 +35,29 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 					{
 						Directory.CreateDirectory(directoryName);
 					}
-
-					if (fileName != String.Empty)
+					if (Path.GetDirectoryName(fileName) != (fileName.EndsWith(Path.DirectorySeparatorChar+string.Empty) ? fileName.Substring(0, fileName.Length - 1) : fileName))
 					{
-						using (FileStream streamWriter = File.Create(fileName))
+						if (fileName != String.Empty)
 						{
-
-							int size = 2048;
-							byte[] data = new byte[2048];
-							while (true)
+							using (FileStream streamWriter = File.Create(fileName))
 							{
-								size = s.Read(data, 0, data.Length);
-								if (size > 0)
+
+								int size = 2048;
+								byte[] data = new byte[2048];
+								while (true)
 								{
-									streamWriter.Write(data, 0, size);
-								}
-								else
-								{
-									break;
+									size = s.Read(data, 0, data.Length);
+									if (size > 0)
+									{
+										streamWriter.Write(data, 0, size);
+									}
+									else
+									{
+										break;
+									}
 								}
 							}
-						}
+						}	
 					}
 				}
 			}
