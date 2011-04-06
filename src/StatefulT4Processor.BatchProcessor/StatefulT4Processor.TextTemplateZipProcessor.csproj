@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
+    <Compile Include="Services\RecursivelyRenameFilesAndDirectoriesByConventionService.cs" />
     <Compile Include="TextTemplateZipProcessor.cs" />
     <Compile Include="Helpers\T4TemplateHostWrapper.cs" />
     <Compile Include="Services\ExtractZipToDirectoryService.cs" />
