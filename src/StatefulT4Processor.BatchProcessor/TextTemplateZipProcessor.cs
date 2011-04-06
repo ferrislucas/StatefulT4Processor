@@ -14,10 +14,13 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 		{
 			private readonly IExtractZipToDirectoryService extractZipToDirectoryService;
 			private readonly IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService;
+			private readonly IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention;
 
 			public TextTemplateZipProcessor(IExtractZipToDirectoryService extractZipToDirectoryService,
-									IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService)
+									IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService,
+									IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention)
 			{
+				this.recursivelyRenameFilesAndFoldersByConvention = recursivelyRenameFilesAndFoldersByConvention;
 				this.processAndDeleteT4TemplatesService = processAndDeleteT4TemplatesService;
 				this.extractZipToDirectoryService = extractZipToDirectoryService;
 			}
@@ -27,6 +30,8 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 				extractZipToDirectoryService.ExtractToPath(pathToZip, outputPath);
 
 				var errors = processAndDeleteT4TemplatesService.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(outputPath);
+
+				recursivelyRenameFilesAndFoldersByConvention.RecursivelyRename(outputPath);				
 
 				return errors;
 			}

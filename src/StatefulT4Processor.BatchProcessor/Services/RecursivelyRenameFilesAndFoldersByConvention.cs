@@ -5,12 +5,12 @@ using System.Text;
 
 namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 {
-	public interface IRecursivelyRenameFilesAndDirectoriesByConventionService
+	public interface IRecursivelyRenameFilesAndFoldersByConvention
 	{
 		void RecursivelyRename(string path);
 	}
 
-	public class RecursivelyRenameFilesAndDirectoriesByConventionService : IRecursivelyRenameFilesAndDirectoriesByConventionService
+	public class RecursivelyRenameFilesAndFoldersByConvention : IRecursivelyRenameFilesAndFoldersByConvention
 	{
 		public void RecursivelyRename(string path)
 		{
