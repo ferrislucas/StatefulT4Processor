@@ -48,6 +48,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\RenameFileOrFolderAccordingToConventionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProcessAndDeleteT4TemplatesServiceTests.cs" />
     <Compile Include="Services\RecursivelyRenameFilesAndFoldersByConventionTests.cs" />
