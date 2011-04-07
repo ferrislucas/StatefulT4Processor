@@ -28,7 +28,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests.Services
 		{
 			var dictionary = new Dictionary<string, string>();
 			dictionary.Add("test", "test2");
-			mocker.GetMock<IT4StateContext>().Setup(a => a.GetDictionary())
+			mocker.GetMock<IT4StateContext>().Setup(a => a.GetDictionaryFromState())
 				.Returns(dictionary);
 			mocker.GetMock<IFileSystem>().Setup(a => a.GetFiles("path"))
 				.Returns(new string[]

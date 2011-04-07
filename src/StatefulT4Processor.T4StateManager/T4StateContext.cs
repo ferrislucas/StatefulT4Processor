@@ -13,21 +13,18 @@ namespace StatefulT4Processor.T4StateManager
 	{
 		void SetState(string xml);
 		string GetStringFromState(string key);
-		Dictionary<string, string> GetDictionary();
+		Dictionary<string, string> GetDictionaryFromState();
 	}
 
 	public class T4StateContext : IT4StateContext
 	{
 		private readonly GetValueFromTwoDimensionalStringArrayAsIfItWereAHash getValueFromTwoDimensionalStringArrayAsIfItWereAHash;
+		private readonly GetDictionaryFromStringArray getDictionaryFromStringArray;
 
 		public T4StateContext()
 		{
 			getValueFromTwoDimensionalStringArrayAsIfItWereAHash = new GetValueFromTwoDimensionalStringArrayAsIfItWereAHash();
-		}
-
-		public Dictionary<string, string> GetDictionary()
-		{
-			throw new NotImplementedException();
+			getDictionaryFromStringArray = new GetDictionaryFromStringArray();
 		}
 
 		public void SetState(string xml)
@@ -42,11 +39,21 @@ namespace StatefulT4Processor.T4StateManager
 
 		public string GetStringFromState(string key)
 		{
+			return getValueFromTwoDimensionalStringArrayAsIfItWereAHash.GetValue(GetState(), key);
+		}
+
+		public Dictionary<string, string> GetDictionaryFromState()
+		{
+			return getDictionaryFromStringArray.GetDictionaryFrom2DimensionalArray(GetState());
+		}
+
+		private string[][] GetState()
+		{
 			string fileContents;
 			using (TextReader textReader = new StreamReader(GetPathToStateXmlFile()))
 			{
 				fileContents = textReader.ReadToEnd();
-				textReader.Close();	
+				textReader.Close();
 			}
 
 			using (var memoryStream = new MemoryStream(ASCIIEncoding.Default.GetBytes(fileContents)))
@@ -54,7 +61,7 @@ namespace StatefulT4Processor.T4StateManager
 				var deserializer = new XmlSerializer(typeof(string[][]));
 				var data = (string[][])deserializer.Deserialize(memoryStream);
 
-				return getValueFromTwoDimensionalStringArrayAsIfItWereAHash.GetValue(data, key);
+				return data;
 			}
 		}
 

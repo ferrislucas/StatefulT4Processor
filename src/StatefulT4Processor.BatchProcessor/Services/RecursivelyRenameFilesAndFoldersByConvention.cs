@@ -32,7 +32,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 		{
 			foreach(var file in fileSystem.GetFiles(path))
 			{
-				renameFileOrFolderAccordingToConvention.Rename(file, t4StateContext.GetDictionary());
+				renameFileOrFolderAccordingToConvention.Rename(file, t4StateContext.GetDictionaryFromState());
 			}
 			foreach (var directory in fileSystem.GetDirectories(path))
 			{
