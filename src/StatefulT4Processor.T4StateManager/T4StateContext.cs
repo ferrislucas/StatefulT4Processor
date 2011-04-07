@@ -13,6 +13,7 @@ namespace StatefulT4Processor.T4StateManager
 	{
 		void SetState(string xml);
 		string GetStringFromState(string key);
+		Dictionary<string, string> GetDictionary();
 	}
 
 	public class T4StateContext : IT4StateContext
@@ -22,6 +23,11 @@ namespace StatefulT4Processor.T4StateManager
 		public T4StateContext()
 		{
 			getValueFromTwoDimensionalStringArrayAsIfItWereAHash = new GetValueFromTwoDimensionalStringArrayAsIfItWereAHash();
+		}
+
+		public Dictionary<string, string> GetDictionary()
+		{
+			throw new NotImplementedException();
 		}
 
 		public void SetState(string xml)

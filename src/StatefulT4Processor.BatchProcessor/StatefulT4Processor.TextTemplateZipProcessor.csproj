@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\RenameFileOrFolderAccordingToConvention.cs" />
     <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
     <Compile Include="Services\RecursivelyRenameFilesAndFoldersByConvention.cs" />
     <Compile Include="TextTemplateZipProcessor.cs" />
@@ -63,6 +64,10 @@
     <ProjectReference Include="..\StatefulT4Processor.Shared\StatefulT4Processor.Shared.csproj">
       <Project>{1F7EF82F-4379-42DC-81D1-2639A0A4A166}</Project>
       <Name>StatefulT4Processor.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatefulT4Processor.T4StateManager\StatefulT4Processor.T4StateManager.csproj">
+      <Project>{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}</Project>
+      <Name>StatefulT4Processor.T4StateManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
