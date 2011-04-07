@@ -20,7 +20,6 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests.Helpers
 		public void Init()
 		{
 			mocker = new AutoMoqer();
-			
 			dictionary.Add("TOKEN", "VALUE");
 		}
 
@@ -38,6 +37,38 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests.Helpers
 			mocker.Resolve<RenameFileOrFolderAccordingToConvention>().Rename("path/test.txt", dictionary);
 
 			mocker.GetMock<IFileSystem>().Verify(a => a.Move(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
+		}
+
+		[TestMethod]
+		public void Creates_folder_if_it_does_not_already_exist()
+		{
+			mocker.GetMock<IFileSystem>().Setup(a => a.DirectoryExists("path/testVALUE")).Returns(false);
+			mocker.GetMock<IFileSystem>().Setup(a => a.IsDirectory("path/test_-_TOKEN_-_")).Returns(true);
+
+			mocker.Resolve<RenameFileOrFolderAccordingToConvention>().Rename("path/test_-_TOKEN_-_", dictionary);
+
+			mocker.GetMock<IFileSystem>().Verify(a => a.CreateFolder("path/testVALUE"), Times.Once());
+		}
+
+		[TestMethod]
+		public void Does_not_create_folder_if_it_already_exists()
+		{
+			mocker.GetMock<IFileSystem>().Setup(a => a.DirectoryExists("path/testVALUE")).Returns(true);
+
+			mocker.Resolve<RenameFileOrFolderAccordingToConvention>().Rename("path/test_-_TOKEN_-_", dictionary);
+
+			mocker.GetMock<IFileSystem>().Verify(a => a.CreateFolder("path/testVALUE"), Times.Never());
+		}
+
+		[TestMethod]
+		public void Does_not_create_folder_if_the_source_item_being_moved_is_not_a_folder()
+		{
+			mocker.GetMock<IFileSystem>().Setup(a => a.DirectoryExists("path/testVALUE")).Returns(false);
+			mocker.GetMock<IFileSystem>().Setup(a => a.IsDirectory("path/test_-_TOKEN_-_")).Returns(false);
+
+			mocker.Resolve<RenameFileOrFolderAccordingToConvention>().Rename("path/test_-_TOKEN_-_", dictionary);
+
+			mocker.GetMock<IFileSystem>().Verify(a => a.CreateFolder("path/testVALUE"), Times.Never());
 		}
 
 	}

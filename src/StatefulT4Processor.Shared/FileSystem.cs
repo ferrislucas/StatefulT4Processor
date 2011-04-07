@@ -25,12 +25,14 @@ namespace StatefulT4Processor.Shared
 		bool DirectoryExists(string path);
 		void DeleteDirectory(string path);
 		string[] GetDirectories(string path);
+		bool IsDirectory(string path);
 	}
 
 	public class FileInformation
 	{
 		public System.DateTime CreationTime { get; set; }
 		public System.DateTime LastAccessTime { get; set; }
+		public string DirectoryName { get; set; }
 	}
 
 	public class FileSystem : IFileSystem
@@ -113,7 +115,18 @@ namespace StatefulT4Processor.Shared
 
 		public void Move(string sourcePath, string destinationPath)
 		{
+			var destinationFolder = Path.GetDirectoryName(destinationPath);
+			if (!DirectoryExists(destinationFolder))
+				Directory.CreateDirectory(destinationFolder);
+
 			File.Move(sourcePath, destinationPath);
+		}
+
+		public bool IsDirectory(string path)
+		{
+			var fileInfo = GetFileInformation(path);
+
+			return fileInfo.DirectoryName == path;
 		}
 
 		public FileInformation GetFileInformation(string path)
@@ -125,6 +138,7 @@ namespace StatefulT4Processor.Shared
 				{
 					CreationTime = fileInfo.CreationTime,
 					LastAccessTime = fileInfo.LastAccessTime,
+
 				};
 			}
 			return null;

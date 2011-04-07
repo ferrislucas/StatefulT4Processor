@@ -30,7 +30,13 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Helpers
 			}
 
 			if (path != newPath)
+			{
+				if ((!fileSystem.DirectoryExists(newPath)) && (fileSystem.IsDirectory(path)))
+					fileSystem.CreateFolder(newPath);
+
 				fileSystem.Move(path, newPath);
+			}
+				
 		}
 	}
 }
