@@ -36,7 +36,6 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Helpers
 
 				fileSystem.Move(path, newPath);
 			}
-				
 		}
 	}
 }
