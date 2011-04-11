@@ -21,6 +21,32 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests
 		}
 
 		[TestMethod]
+		public void Deletes_tt_files_from_output_folder()
+		{
+			mocker.Resolve<StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor>().ProcessZip("pathToZip", "outputPath");
+
+			mocker.GetMock<IRecursivelyDeleteTtFilesInPathService>().Verify(a => a.RecursivelyDeleteTtFilesInPath("outputPath"), Times.Once());
+		}
+
+		[TestMethod]
+		public void Calls_RecursivelyDeleteTtFilesInPath_method_of_IRecursivelyDeleteTtFilesInPathService_after_processing_queue()
+		{
+			var textTemplateZipProcessor =
+				new StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor(
+					mocker.GetMock<IExtractZipToDirectoryService>().Object,
+					mocker.GetMock<IRecursivelyRenameFilesAndFoldersByConvention>().Object,
+					mocker.GetMock<ICreateQueueFromPathService>().Object
+					, new DummyQueueProcessorService(), mocker.GetMock<IRecursivelyDeleteTtFilesInPathService>().Object);
+			try
+			{
+				textTemplateZipProcessor.ProcessZip("pathToZip", "outputPath");
+			}
+			catch (Exception) { }
+
+			mocker.GetMock<IRecursivelyDeleteTtFilesInPathService>().Verify(a => a.RecursivelyDeleteTtFilesInPath("outputPath"), Times.Never());
+		}
+
+		[TestMethod]
 		public void Returns_errors_from_IQueueProcessorService()
 		{
 			mocker.GetMock<IQueueProcessorService>().Setup(a => a.ProcessQueue(It.IsAny<Queue>()))
@@ -67,7 +93,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests
 		[TestMethod]
 		public void Calls_RecursivelyBuildQueueFromPath_method_after_unpacking_zip()
 		{
-			var textTemplateZipProcessor = new TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor(new DummyExtractZipToDirectoryService(), mocker.GetMock<IRecursivelyRenameFilesAndFoldersByConvention>().Object, mocker.GetMock<ICreateQueueFromPathService>().Object, mocker.GetMock<IQueueProcessorService>().Object);
+			var textTemplateZipProcessor = new TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor(new DummyExtractZipToDirectoryService(), mocker.GetMock<IRecursivelyRenameFilesAndFoldersByConvention>().Object, mocker.GetMock<ICreateQueueFromPathService>().Object, mocker.GetMock<IQueueProcessorService>().Object, mocker.GetMock<IRecursivelyDeleteTtFilesInPathService>().Object);
 			try
 			{
 				textTemplateZipProcessor.ProcessZip("pathToZip", "outputPath");
@@ -95,7 +121,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests
 					mocker.GetMock<IExtractZipToDirectoryService>().Object, 
 					mocker.GetMock<IRecursivelyRenameFilesAndFoldersByConvention>().Object,
 					mocker.GetMock<ICreateQueueFromPathService>().Object
-					, new DummyQueueProcessorService());
+					, new DummyQueueProcessorService(), mocker.GetMock<IRecursivelyDeleteTtFilesInPathService>().Object);
 			try
 			{
 				textTemplateZipProcessor.ProcessZip("pathToZip", "outputPath");
@@ -117,7 +143,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests
 		[TestMethod]
 		public void Calls_RecursivelyProcessAndDeleteT4TemplatesStartingAtPath_method_after_unpacking_zip()
 		{
-			var textTemplateZipProcessor = new TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor(new DummyExtractZipToDirectoryService(), mocker.GetMock<IRecursivelyRenameFilesAndFoldersByConvention>().Object, mocker.GetMock<ICreateQueueFromPathService>().Object, mocker.GetMock<IQueueProcessorService>().Object);
+			var textTemplateZipProcessor = new TextTemplateZipProcessor.StatefulT4Processor.BatchProcessor.TextTemplateZipProcessor(new DummyExtractZipToDirectoryService(), mocker.GetMock<IRecursivelyRenameFilesAndFoldersByConvention>().Object, mocker.GetMock<ICreateQueueFromPathService>().Object, mocker.GetMock<IQueueProcessorService>().Object, mocker.GetMock<IRecursivelyDeleteTtFilesInPathService>().Object);
 			try
 			{
 				textTemplateZipProcessor.ProcessZip("pathToZip", "outputPath");

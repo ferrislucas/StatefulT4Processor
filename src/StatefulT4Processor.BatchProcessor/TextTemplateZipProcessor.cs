@@ -16,12 +16,15 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 			private readonly IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention;
 			private readonly ICreateQueueFromPathService createQueueFromPathService;
 			private readonly IQueueProcessorService queueProcessorService;
+			private IRecursivelyDeleteTtFilesInPathService recursivelyDeleteTtFilesInPathService;
 
 			public TextTemplateZipProcessor(IExtractZipToDirectoryService extractZipToDirectoryService,
 									IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention,
 									ICreateQueueFromPathService createQueueFromPathService,
-									IQueueProcessorService queueProcessorService)
+									IQueueProcessorService queueProcessorService,
+									IRecursivelyDeleteTtFilesInPathService recursivelyDeleteTtFilesInPathService)
 			{
+				this.recursivelyDeleteTtFilesInPathService = recursivelyDeleteTtFilesInPathService;
 				this.queueProcessorService = queueProcessorService;
 				this.createQueueFromPathService = createQueueFromPathService;
 				this.recursivelyRenameFilesAndFoldersByConvention = recursivelyRenameFilesAndFoldersByConvention;
@@ -36,7 +39,9 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 
 				var errors = queueProcessorService.ProcessQueue(queue);
 
-				recursivelyRenameFilesAndFoldersByConvention.RecursivelyRename(outputPath);				
+				recursivelyRenameFilesAndFoldersByConvention.RecursivelyRename(outputPath);
+
+				recursivelyDeleteTtFilesInPathService.RecursivelyDeleteTtFilesInPath(outputPath);
 
 				return errors;
 			}
