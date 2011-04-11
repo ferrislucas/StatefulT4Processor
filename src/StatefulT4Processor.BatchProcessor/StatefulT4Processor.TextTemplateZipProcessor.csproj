@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="Helpers\RenameFileOrFolderAccordingToConvention.cs" />
     <Compile Include="Registration\RegisterInterfaceToSingleImplementations.cs" />
+    <Compile Include="Services\CreateQueueFromPathService.cs" />
+    <Compile Include="Services\QueueProcessorService.cs" />
     <Compile Include="Services\RecursivelyRenameFilesAndFoldersByConvention.cs" />
     <Compile Include="TextTemplateZipProcessor.cs" />
     <Compile Include="Helpers\T4TemplateHostWrapper.cs" />

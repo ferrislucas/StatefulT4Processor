@@ -67,6 +67,10 @@
       <Project>{BFB4C78C-7674-4EE8-9330-8D82D5ABA2C6}</Project>
       <Name>StatefulT4Processor.T4StateManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\T4HostConsoleApplication\StatefulT4Processor.T4HostConsoleApplication.csproj">
+      <Project>{34A2D7C6-CD10-4AE7-B07C-F30223C9AD7C}</Project>
+      <Name>StatefulT4Processor.T4HostConsoleApplication</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

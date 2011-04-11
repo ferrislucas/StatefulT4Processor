@@ -49,6 +49,7 @@
     <Compile Include="GetWorkingFolderPath.cs" />
     <Compile Include="GuidGetter.cs" />
     <Compile Include="InterfaceToSingleImplementationRegistrationConvention.cs" />
+    <Compile Include="Models\Queue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterInterfaceToSingleImplementations.cs" />
     <Compile Include="ValidationMessages.cs" />

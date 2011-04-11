@@ -13,15 +13,18 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 		public class TextTemplateZipProcessor : ITextTemplateZipProcessor
 		{
 			private readonly IExtractZipToDirectoryService extractZipToDirectoryService;
-			private readonly IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService;
 			private readonly IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention;
+			private readonly ICreateQueueFromPathService createQueueFromPathService;
+			private readonly IQueueProcessorService queueProcessorService;
 
 			public TextTemplateZipProcessor(IExtractZipToDirectoryService extractZipToDirectoryService,
-									IProcessAndDeleteT4TemplatesService processAndDeleteT4TemplatesService,
-									IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention)
+									IRecursivelyRenameFilesAndFoldersByConvention recursivelyRenameFilesAndFoldersByConvention,
+									ICreateQueueFromPathService createQueueFromPathService,
+									IQueueProcessorService queueProcessorService)
 			{
+				this.queueProcessorService = queueProcessorService;
+				this.createQueueFromPathService = createQueueFromPathService;
 				this.recursivelyRenameFilesAndFoldersByConvention = recursivelyRenameFilesAndFoldersByConvention;
-				this.processAndDeleteT4TemplatesService = processAndDeleteT4TemplatesService;
 				this.extractZipToDirectoryService = extractZipToDirectoryService;
 			}
 
@@ -29,7 +32,9 @@ namespace StatefulT4Processor.TextTemplateZipProcessor
 			{
 				extractZipToDirectoryService.ExtractToPath(pathToZip, outputPath);
 
-				var errors = processAndDeleteT4TemplatesService.RecursivelyProcessAndDeleteT4TemplatesStartingAtPathAndReturnErrors(outputPath);
+				var queue = createQueueFromPathService.RecursivelyBuildQueueFromPath(outputPath);
+
+				var errors = queueProcessorService.ProcessQueue(queue);
 
 				recursivelyRenameFilesAndFoldersByConvention.RecursivelyRename(outputPath);				
 

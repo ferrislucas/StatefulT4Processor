@@ -26,7 +26,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Helpers
 					FileName = ConfigurationManager.AppSettings["PathToT4HostConsoleApplication"],
 					Arguments = string.Format("{0} {1}", inputFile, outputFile),
 					UseShellExecute = false,
-					RedirectStandardOutput = true
+					RedirectStandardOutput = true, 
 				}
 			};
 			//p.StartInfo.Arguments = p.StartInfo.Arguments + " " + p.Id;
