@@ -24,6 +24,27 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Tests.Services
 		}
 
 		[TestMethod]
+		public void Deletes_folders_which_have_replace_tags_in_the_name()
+		{
+			var folder1Path = RenameFileOrFolderAccordingToConvention.TokenDelimiter + "folder1" +
+			                  RenameFileOrFolderAccordingToConvention.TokenDelimiter;
+			mocker.GetMock<IFileSystem>().Setup(a => a.GetDirectories("path"))
+				.Returns(new string[]
+				         	{
+								folder1Path,
+								"test"
+							});
+
+			mocker.Resolve<RecursivelyRenameFilesAndFoldersByConvention>()
+				.RecursivelyRename("path");
+
+			mocker.GetMock<IFileSystem>()
+				.Verify(a => a.DeleteDirectory(folder1Path), Times.Once());
+			mocker.GetMock<IFileSystem>()
+				.Verify(a => a.DeleteDirectory("test"), Times.Never());
+		}
+
+		[TestMethod]
 		public void Calls_Rename_method_of_IFileSystem()
 		{
 			var dictionary = new Dictionary<string, string>();

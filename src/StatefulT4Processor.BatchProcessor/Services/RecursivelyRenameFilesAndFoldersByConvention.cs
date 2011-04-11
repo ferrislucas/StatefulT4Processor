@@ -34,9 +34,11 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 			{
 				renameFileOrFolderAccordingToConvention.Rename(file, t4StateContext.GetDictionaryFromState());
 			}
-			foreach (var directory in fileSystem.GetDirectories(path))
+			foreach(var directory in fileSystem.GetDirectories(path))
 			{
 				RecursivelyRename(directory);
+				if (directory.Contains(RenameFileOrFolderAccordingToConvention.TokenDelimiter))
+					fileSystem.DeleteDirectory(directory);
 			}
 		}
 	}
