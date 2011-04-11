@@ -36,7 +36,7 @@ namespace T4HostConsoleApplication
 				
 				foreach (var item in queue.QueueItems)
 				{
-					Console.WriteLine(string.Format("transforming {0} -> {1}", item.InputPath, item.OutputPath));
+					//Console.WriteLine(string.Format("transforming {0} -> {1}", item.InputPath, item.OutputPath));
 					t4TemplateHostWrapper.ProcessT4File(item.InputPath, item.OutputPath);
 				}
 				

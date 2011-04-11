@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using StatefulT4Processor.Shared;
 using StatefulT4Processor.Shared.Models;
 
@@ -22,19 +23,19 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 		public Queue RecursivelyBuildQueueFromPath(string path)
 		{
 			var queue = new Queue();
-			queue.QueueItems = GetQueueItemsFromPath(path);
+			queue.QueueItems = GetQueueItemsFromPath(path).ToArray();
 			return queue;
 		}
 
 		public IEnumerable<QueueItem> GetQueueItemsFromPath(string path)
 		{
 			var list = new List<QueueItem>();
-			foreach (var file in fileSystem.GetFiles(path))
+			foreach (var file in fileSystem.GetFiles(path).Where(a => a.EndsWith(".tt")))
 			{
 				list.Add(new QueueItem()
 				         	{
 				         		InputPath = file,
-								
+								OutputPath = file.Replace(".tt", string.Empty)
 				         	});
 			}
 			foreach (var folder in fileSystem.GetDirectories(path))

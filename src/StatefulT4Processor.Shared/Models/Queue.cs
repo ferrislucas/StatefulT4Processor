@@ -4,7 +4,7 @@ namespace StatefulT4Processor.Shared.Models
 {
 	public class Queue
 	{
-		public IEnumerable<QueueItem> QueueItems { get; set; }
+		public QueueItem[] QueueItems { get; set; }
 	}
 
 	public class QueueItem

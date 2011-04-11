@@ -22,7 +22,7 @@ namespace StatefulT4Processor.TextTemplateZipProcessor.Services
 			string xml;
 			using (var memoryStream = new MemoryStream())
 			{
-				var serializer = new XmlSerializer(typeof(string[]));
+				var serializer = new XmlSerializer(typeof(Queue));
 				serializer.Serialize(memoryStream, queue);
 				memoryStream.Position = 0;
 				var sr = new StreamReader(memoryStream);
