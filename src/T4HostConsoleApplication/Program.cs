@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Xml.Serialization;
 using CATALYST.Core;
+using StatefulT4Processor.Shared.Models;
 
 namespace T4HostConsoleApplication
 {
@@ -13,17 +14,31 @@ namespace T4HostConsoleApplication
 	{
 		static void Main(string[] args)
 		{
-			//Thread.Sleep(15000);
-			
 			var resultXml = string.Empty;
 			try
 			{
-				var inputFile = args[0];
-				var outputFile = args[1];
+				Queue queue;
+				var queueFile = args[0];
 
-				var t4TemplateHostWrapper = new CATALYST.Core.T4TemplateHostWrapper();
-				t4TemplateHostWrapper.ProcessT4File(inputFile, outputFile);
+				string fileContents;
+				using (TextReader textReader = new StreamReader(queueFile))
+				{
+					fileContents = textReader.ReadToEnd();
+					textReader.Close();
+				}
+				using (var memoryStream = new MemoryStream(ASCIIEncoding.Default.GetBytes(fileContents)))
+				{
+					var deserializer = new XmlSerializer(typeof(Queue));
+					queue = (Queue)deserializer.Deserialize(memoryStream);
+				}
 
+				var t4TemplateHostWrapper = new T4TemplateHostWrapper();
+				
+				foreach (var item in queue.QueueItems)
+				{
+					t4TemplateHostWrapper.ProcessT4File(item.InputPath, item.OutputPath);
+				}
+				
 				resultXml = GetResultXml(t4TemplateHostWrapper);
 			}
 			catch (Exception e)
