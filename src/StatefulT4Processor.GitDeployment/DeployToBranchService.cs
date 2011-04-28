@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,25 +27,79 @@ namespace StatefulT4Processor.GitDeployment
 		public GitDeploymentResult Deploy(GitDeploymentTarget gitDeploymentTarget, string pathToGeneratedCode)
 		{
 			var tempPath = getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
+			fileSystem.CreateFolder(tempPath);
 
-			var cloneCommand = new CloneCommand();
-			cloneCommand.Source = gitDeploymentTarget.RepositoryUrl;
-
-			cloneCommand.Directory = tempPath;
-			cloneCommand.NoCheckout = true;
-			cloneCommand.Execute();
+			CloneTheRepositoryAndGetOnTheDesiredBranch(tempPath, gitDeploymentTarget);
 
 			fileSystem.CopyFolder(pathToGeneratedCode, tempPath);
 
-			var repo = new Repository(tempPath);
-			GitSharp.Branch.Create(repo, "test_branch");
+			AddTheNewFilesAndCommitThem(tempPath);
 
-			//var currentCommit = repo.CurrentBranch.CurrentCommit;
-			//repo.Index.AddAll();
-			//repo.Commit("this is a test");)
+			ExecuteGitCommand(tempPath, string.Format("git push origin ", gitDeploymentTarget.BranchName));
 
+			//var path = string.Format(@"{0}test.bat", tempPath);
+			//var process = new Process
+			//{
+			//    StartInfo =
+			//    {
+			//        FileName = path,
+			//        Arguments = gitDeploymentTarget.BranchName,
+			//        UseShellExecute = false,
+			//        WorkingDirectory = tempPath,
+			//        RedirectStandardOutput = true,
+			//    }
+			//};
+
+			//process.Start();
+			//var output = process.StandardOutput.ReadToEnd();
+			//process.Close();
+			//process.Dispose();
 
 			return null;
+		}
+
+		private void AddTheNewFilesAndCommitThem(string tempPath)
+		{
+			ExecuteGitCommand(tempPath, "git add --all");
+			ExecuteGitCommand(tempPath, "git commit -a");
+		}
+
+		private void CloneTheRepositoryAndGetOnTheDesiredBranch(string tempPath, GitDeploymentTarget gitDeploymentTarget)
+		{
+			ExecuteGitCommand(tempPath, string.Format("git clone {0} ./", gitDeploymentTarget.RepositoryUrl));
+			if (ExecuteGitCommand(tempPath, "git branch").Contains(gitDeploymentTarget.BranchName))
+			{
+				ExecuteGitCommand(tempPath, string.Format("git checkout {0}", gitDeploymentTarget.BranchName));
+			} else
+			{
+				ExecuteGitCommand(tempPath, string.Format("git checkout -b {0}", gitDeploymentTarget.BranchName));
+			}
+		}
+
+		private string ExecuteGitCommand(string workingDirectory, string command)
+		{
+			if (command.StartsWith("git "))
+				command = command.Substring(4);
+			
+			var process = new Process
+			{
+				StartInfo =
+				{
+					FileName = @"C:\Program Files (x86)\Git\bin\git.exe",
+					Arguments = command,
+					UseShellExecute = false,
+					WorkingDirectory = workingDirectory,
+					RedirectStandardOutput = true,
+				}
+			};
+			
+			process.Start();
+			var output = process.StandardOutput.ReadToEnd();
+
+			process.Close();
+			process.Dispose();
+
+			return output;
 		}
 	}
 }

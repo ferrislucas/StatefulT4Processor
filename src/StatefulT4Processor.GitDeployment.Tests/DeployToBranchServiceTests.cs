@@ -19,9 +19,7 @@ namespace StatefulT4Processor.GitDeployment.Tests
 			deployToBranchService.Deploy(new GitDeploymentTarget()
 			                             	{
 			                             		BranchName = "test",
-												//RepositoryUrl = "https://ferrislucas@github.com/ferrislucas/EasyObjectStore.git", 
-												RepositoryUrl = "git://github.com/ferrislucas/EasyObjectStore.git",
-												//RepositoryUrl = "git@degsapp07.deg.local:Test2.git",
+												RepositoryUrl = "git@github.com:ferrislucas/StatefulT4Processor.git",
 											}, @"C:\_Application\StatefulT4Processor\localWorkingFolder\T4Output\856d2587-5cf5-43a1-9fee-a2d4f67f16af");
 		}
 	}
