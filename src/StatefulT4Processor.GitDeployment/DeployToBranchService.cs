@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using GitSharp;
 using GitSharp.Commands;
@@ -35,7 +36,7 @@ namespace StatefulT4Processor.GitDeployment
 
 			AddTheNewFilesAndCommitThem(tempPath);
 
-			ExecuteGitCommand(tempPath, string.Format("git push origin ", gitDeploymentTarget.BranchName));
+			ExecuteGitCommand(tempPath, string.Format("git push origin {0}", gitDeploymentTarget.BranchName));
 
 			//var path = string.Format(@"{0}test.bat", tempPath);
 			//var process = new Process
@@ -87,15 +88,16 @@ namespace StatefulT4Processor.GitDeployment
 				{
 					FileName = @"C:\Program Files (x86)\Git\bin\git.exe",
 					Arguments = command,
-					UseShellExecute = false,
+					UseShellExecute = true,
+					RedirectStandardOutput = false,
 					WorkingDirectory = workingDirectory,
-					RedirectStandardOutput = true,
 				}
 			};
 			
 			process.Start();
 			var output = process.StandardOutput.ReadToEnd();
 
+			process.WaitForExit();
 			process.Close();
 			process.Dispose();
 
