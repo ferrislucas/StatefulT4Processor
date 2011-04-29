@@ -27,8 +27,8 @@ namespace StatefulT4Processor.GitDeployment
 
 		public GitDeploymentResult Deploy(GitDeploymentTarget gitDeploymentTarget, string pathToGeneratedCode)
 		{
-			var tempPath = @"C:\_Application\test" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar; // getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
-			//var tempPath = getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
+			//var tempPath = @"C:\_Application\test" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar; // getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
+			var tempPath = getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
 			fileSystem.CreateFolder(tempPath);
 
 			CloneTheRepositoryAndGetOnTheDesiredBranch(tempPath, gitDeploymentTarget);
@@ -63,7 +63,7 @@ namespace StatefulT4Processor.GitDeployment
 		private void AddTheNewFilesAndCommitThem(string tempPath)
 		{
 			ExecuteGitCommand(tempPath, "git add --all");
-			ExecuteGitCommand(tempPath, "git commit -a");
+			ExecuteGitCommand(tempPath, "git commit -am \'auto-generated commit\'");
 		}
 
 		private void CloneTheRepositoryAndGetOnTheDesiredBranch(string tempPath, GitDeploymentTarget gitDeploymentTarget)
