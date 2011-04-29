@@ -63,7 +63,7 @@ namespace StatefulT4Processor.GitDeployment
 		private void AddTheNewFilesAndCommitThem(string tempPath)
 		{
 			ExecuteGitCommand(tempPath, "git add --all");
-			ExecuteGitCommand(tempPath, "git commit -am \'auto-generated commit\'");
+			ExecuteGitCommand(tempPath, "git commit -am \'auto_generated_commit\'");
 		}
 
 		private void CloneTheRepositoryAndGetOnTheDesiredBranch(string tempPath, GitDeploymentTarget gitDeploymentTarget)
@@ -89,8 +89,9 @@ namespace StatefulT4Processor.GitDeployment
 				{
 					FileName = @"C:\Program Files (x86)\Git\bin\sh.exe",
 					Arguments = @"C:\_Application\StatefulT4Processor\git_shell.sh """ + command + @"""",
-					UseShellExecute = true,
-					RedirectStandardOutput = false,
+					UseShellExecute = false,
+					RedirectStandardOutput = true,
+					CreateNoWindow = true,
 					WorkingDirectory = workingDirectory,
 				}
 			};
