@@ -82,18 +82,32 @@ namespace StatefulT4Processor.GitDeployment
 			if (command.StartsWith("git "))
 				command = command.Substring(4);
 			
+			//var process = new Process
+			//{
+			//    StartInfo =
+			//    {
+			//        FileName = @"C:\Program Files (x86)\Git\bin\git.exe",
+			//        Arguments = command,
+			//        UseShellExecute = true,
+			//        RedirectStandardOutput = false,
+			//        WorkingDirectory = workingDirectory,
+			//    }
+			//};
 			var process = new Process
 			{
 				StartInfo =
 				{
-					FileName = @"C:\Program Files (x86)\Git\bin\git.exe",
+					FileName = @"C:\Program Files (x86)\Git\cmd\git.cmd",
 					Arguments = command,
-					UseShellExecute = true,
-					RedirectStandardOutput = false,
-					WorkingDirectory = workingDirectory,
+					UseShellExecute = false,
+					RedirectStandardOutput = true,
+					CreateNoWindow = true,
+					WorkingDirectory = @"C:\_Application\test"
 				}
 			};
-			
+			process.Start();
+			process.WaitForExit();
+
 			process.Start();
 			var output = process.StandardOutput.ReadToEnd();
 

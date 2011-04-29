@@ -17,9 +17,22 @@ namespace StatefulT4Processor.GitDeployment.Tests
 		[TestMethod]
 		public void TestMethod1()
 		{
+			var process = new Process
+				{
+					StartInfo =
+					{
+						FileName = @"C:\Program Files (x86)\Git\cmd\git.cmd", 
+						Arguments = "clone git@github.com:ferrislucas/StatefulT4Processor.git",
+						UseShellExecute = false,
+						RedirectStandardOutput = true,
+						CreateNoWindow = true,
+						WorkingDirectory = @"C:\_Application\test"
+					}
+				};
+			process.Start();
+			process.WaitForExit();
 
-
-			var ouptput = LaunchEXE.Run(@"C:\_Application\test", @"C:\Program Files (x86)\Git\bin\git.exe", "clone git@github.com:ferrislucas/StatefulT4Processor.git", 60 * 20);
+			//var ouptput = LaunchEXE.Run(@"C:\_Application\test", @"C:\Program Files (x86)\Git\bin\git.exe", "clone git@github.com:ferrislucas/StatefulT4Processor.git", 60 * 20);
 
 			//ExecuteGitCommand(@"C:\_Application\test", "git init");
 			//ExecuteGitCommand(@"C:\_Application\test", "git remote add origin git@github.com:ferrislucas/StatefulT4Processor.git");
@@ -50,7 +63,7 @@ namespace StatefulT4Processor.GitDeployment.Tests
 					newProcess.StartInfo.FileName = exeName;
 					newProcess.StartInfo.Arguments = argsLine;
 					newProcess.StartInfo.UseShellExecute = false;
-					newProcess.StartInfo.CreateNoWindow = true;
+					newProcess.StartInfo.CreateNoWindow = false;
 					newProcess.StartInfo.RedirectStandardOutput = true;
 					newProcess.StartInfo.WorkingDirectory = workingDirectory;
 					newProcess.Start();
