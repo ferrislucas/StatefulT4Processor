@@ -11,5 +11,8 @@ namespace StatefulT4Processor.DeploymentManager.Models
 		public string StateXml { get; set; }
 		public DateTime? CreateDate { get; set; }
 		public DateTime? LastModifyDate { get; set; }
+		public string BranchName { get; set; }
+		public bool DeployToGitRepository { get; set; }
+		public string RepositoryUrl { get; set; }
 	}
 }

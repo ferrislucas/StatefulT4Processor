@@ -16,7 +16,7 @@ namespace StatefulT4Processor.GitDeployment
 	public class DeployToBranchService
 	{
 		private readonly IGetWorkingFolderPath getWorkingFolderPath;
-		private IFileSystem fileSystem;
+		private readonly IFileSystem fileSystem;
 
 		public DeployToBranchService(IGetWorkingFolderPath getWorkingFolderPath,
 									IFileSystem fileSystem)

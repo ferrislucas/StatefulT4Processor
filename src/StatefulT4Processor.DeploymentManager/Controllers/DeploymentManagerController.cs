@@ -9,6 +9,8 @@ using StatefulT4Processor.DeploymentManager.Models;
 using StatefulT4Processor.DeploymentManager.Repositories;
 using StatefulT4Processor.DeploymentManager.Services;
 using StatefulT4Processor.DeploymentManager.ViewModelBuilders;
+using StatefulT4Processor.GitDeployment;
+using StatefulT4Processor.GitDeployment.Models;
 using StatefulT4Processor.Shared;
 using StatefulT4Processor.T4StateManager;
 using StatefulT4Processor.TextTemplateBatchManager.Helpers;
@@ -31,6 +33,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly IGetWorkingFolderPath getWorkingFolderPath;
     	private readonly IFileSystem fileSystem;
     	private readonly IT4StateContext t4StateContext;
+    	private DeployToBranchService deployToBranchService;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,
@@ -42,8 +45,10 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 								ITextTemplateBatchContext textTemplateBatchContext,
 								IGetWorkingFolderPath getWorkingFolderPath,
 								IFileSystem fileSystem,
-								IT4StateContext t4StateContext)
+								IT4StateContext t4StateContext,
+								DeployToBranchService deployToBranchService)
     	{
+    		this.deployToBranchService = deployToBranchService;
     		this.t4StateContext = t4StateContext;
     		this.fileSystem = fileSystem;
     		this.getWorkingFolderPath = getWorkingFolderPath;
@@ -72,7 +77,17 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
 				fileSystem.DeleteDirectory(outputPath);
 
 			var errors = textTemplateZipProcessor.ProcessZip(zipFilePath, outputPath);
-			
+
+			if (deployment.DeployToGitRepository)
+			{
+				deployToBranchService.Deploy(new GitDeploymentTarget()
+													{
+														BranchName = deployment.BranchName,
+														RepositoryUrl = deployment.RepositoryUrl
+													}, outputPath);
+				
+			}
+
 			return View("Execute", new ExecuteViewModel()
 			                       	{
 										OutputPath = outputPath,

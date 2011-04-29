@@ -14,7 +14,7 @@ namespace StatefulT4Processor.GitDeployment.Tests
 	[TestClass]
 	public class DeployToBranchServiceTests
 	{
-		[TestMethod]
+		//[TestMethod]
 		public void TestMethod1()
 		{
 			var process = new Process
