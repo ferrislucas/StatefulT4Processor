@@ -33,7 +33,7 @@ namespace StatefulT4Processor.DeploymentManager.Controllers
     	private readonly IGetWorkingFolderPath getWorkingFolderPath;
     	private readonly IFileSystem fileSystem;
     	private readonly IT4StateContext t4StateContext;
-    	private DeployToBranchService deployToBranchService;
+    	private readonly DeployToBranchService deployToBranchService;
 
     	public DeploymentManagerController(IIndexViewModelBuilder indexViewModelBuilder,
 								IModifyViewModelBuilder modifyViewModelBuilder,

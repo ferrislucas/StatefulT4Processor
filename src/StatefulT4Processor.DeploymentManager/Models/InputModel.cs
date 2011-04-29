@@ -8,18 +8,21 @@ namespace StatefulT4Processor.DeploymentManager.Models
 	{
 		[HiddenInput(DisplayValue = false)]
 		public string Id { get; set; }
+		
 		public string Name { get; set; }
 
 		[DisplayName("Batch")]
 		[UIHint("TextTemplateBatchId")]
 		public string TextTemplateBatchId { get; set; }
 
+		public string BranchName { get; set; }
+		
+		public bool DeployToGitRepository { get; set; }
+		
+		public string RepositoryUrl { get; set; }
+
 		[DisplayName("State")]
 		[DataType(DataType.MultilineText)]
 		public string StateXml { get; set; }
-
-		public string BranchName { get; set; }
-		public bool DeployToGitRepository { get; set; }
-		public string RepositoryUrl { get; set; }
 	}
 }
