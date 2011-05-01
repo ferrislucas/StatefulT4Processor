@@ -27,7 +27,6 @@ namespace StatefulT4Processor.GitDeployment
 
 		public GitDeploymentResult Deploy(GitDeploymentTarget gitDeploymentTarget, string pathToGeneratedCode)
 		{
-			//var tempPath = @"C:\_Application\test" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar; // getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
 			var tempPath = getWorkingFolderPath.GetPathToWorkingFolder() + this.GetType().Name + "Temp" + Path.DirectorySeparatorChar + Guid.NewGuid() + Path.DirectorySeparatorChar;
 			fileSystem.CreateFolder(tempPath);
 
@@ -38,24 +37,6 @@ namespace StatefulT4Processor.GitDeployment
 			AddTheNewFilesAndCommitThem(tempPath);
 
 			ExecuteGitCommand(tempPath, string.Format("git push origin {0}", gitDeploymentTarget.BranchName));
-
-			//var path = string.Format(@"{0}test.bat", tempPath);
-			//var process = new Process
-			//{
-			//    StartInfo =
-			//    {
-			//        FileName = path,
-			//        Arguments = gitDeploymentTarget.BranchName,
-			//        UseShellExecute = false,
-			//        WorkingDirectory = tempPath,
-			//        RedirectStandardOutput = true,
-			//    }
-			//};
-
-			//process.Start();
-			//var output = process.StandardOutput.ReadToEnd();
-			//process.Close();
-			//process.Dispose();
 
 			return null;
 		}
@@ -88,30 +69,17 @@ namespace StatefulT4Processor.GitDeployment
 				StartInfo =
 				{
 					FileName = @"C:\Program Files (x86)\Git\bin\sh.exe",
-					Arguments = @"C:\_Application\StatefulT4Processor\git_shell.sh """ + command + @"""",
+					Arguments = @"C:\_Application\StatefulT4Processor\src\StatefulT4Processor.GitDeployment\git_shell.sh """ + command + @"""",
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
 					CreateNoWindow = true,
 					WorkingDirectory = workingDirectory,
 				}
 			};
-
-			//var process = new Process
-			//{
-			//    StartInfo =
-			//    {
-			//        FileName = @"C:\Program Files (x86)\Git\cmd\git.cmd",
-			//        Arguments = command,
-			//        UseShellExecute = false,
-			//        //RedirectStandardOutput = true,
-			//        //CreateNoWindow = true,
-			//        WorkingDirectory = @"C:\_Application\test"
-			//    }
-			//};
 			process.Start();
 			process.WaitForExit();
 
-			var output = string.Empty;//s process.StandardOutput.ReadToEnd();
+			var output = process.StandardOutput.ReadToEnd();
 
 			process.Close();
 			process.Dispose();
