@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -61,6 +62,10 @@ namespace StatefulT4Processor.GitDeployment
 
 		private string ExecuteGitCommand(string workingDirectory, string command)
 		{
+			var unixStylePathToUserHomeDirectory = ConfigurationManager.AppSettings["UnixStylePathToUserHomeDirectory"];
+			var pathToGitShellExe = ConfigurationManager.AppSettings["PathToGitShellExe"];
+			var pathToGitShellScript = ConfigurationManager.AppSettings["PathToGitShellScript"];
+
 			if (command.StartsWith("git "))
 				command = command.Substring(4);
 
@@ -68,8 +73,8 @@ namespace StatefulT4Processor.GitDeployment
 			{
 				StartInfo =
 				{
-					FileName = @"C:\Program Files (x86)\Git\bin\sh.exe",
-					Arguments = @"C:\_Application\StatefulT4Processor\src\StatefulT4Processor.GitDeployment\git_shell.sh """ + command + @"""",
+					FileName = pathToGitShellExe,
+					Arguments = pathToGitShellScript + " " + unixStylePathToUserHomeDirectory + @" """ + command + @"""",
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
 					CreateNoWindow = true,
